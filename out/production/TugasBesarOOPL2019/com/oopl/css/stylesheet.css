@@ -3,7 +3,6 @@
 }
 
 .sidebar {
-    /*-fx-background-color: #6747CD;*/
     -fx-background-color: #746E98;
 }
 
@@ -14,7 +13,7 @@
 
 .button:hover {
     -fx-background-color: #AFDDE4;
-    -fx-border-color: top right bottom left;
+    /*-fx-border-color: top right bottom left;*/
     -fx-border-color: transparent transparent #AFDDE4 transparent;
     -fx-border-width: 1px;
     -fx-border-style: solid;
@@ -49,7 +48,6 @@
 }
 
 .loginBtn {
-    /*-fx-background-color: #6747CD;*/
     -fx-background-color: #746E98;
     -fx-text-fill: #FFF;
     -fx-background-radius: 3px;
@@ -71,4 +69,27 @@
 
 .closeBtn:hover {
     -fx-fill: #ff6666;
+}
+
+.pane {
+    -fx-background-color: #746E98;
+}
+
+.topPane {
+    -fx-background-color: #A7DBCB;
+}
+
+.menubar {
+    -fx-background-color: #746E98;
+    -fx-text-fill: #FFF;
+    -fx-background-radius: 0px;
+}
+
+.menubar:hover {
+    -fx-background-color: transparent;
+    -fx-border-width: 0px 0px 3px 0px;
+    -fx-border-style: solid;
+    -fx-border-color: #ff6666;
+    -fx-text-fill: #AFDDE4;
+    -fx-underline: true;
 }
