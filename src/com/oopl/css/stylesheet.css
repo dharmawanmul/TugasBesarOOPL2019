@@ -93,3 +93,14 @@
     -fx-text-fill: #AFDDE4;
     -fx-underline: true;
 }
+
+.chart-series-line {
+    -fx-stroke-width: 2px;
+}
+.default-color0.chart-series-line { -fx-stroke: #29B6F6 }
+.default-color1.chart-series-line { -fx-stroke: #5E35B1 }
+.default-color2.chart-series-line { -fx-stroke: #D81B60 }
+
+.default-color0.chart-line-symbol { -fx-background-color: #29B6F6, #FFFFFF}
+.default-color1.chart-line-symbol { -fx-background-color: #5E35B1, #FFFFFF}
+.default-color2.chart-line-symbol { -fx-background-color: #D81B60, #FFFFFF}

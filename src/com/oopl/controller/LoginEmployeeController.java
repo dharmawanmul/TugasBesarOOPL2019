@@ -5,7 +5,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 
-public class LoginController {
+public class LoginEmployeeController {
     @FXML
     private void onClicked(MouseEvent mouseEvent) {
         Platform.exit();

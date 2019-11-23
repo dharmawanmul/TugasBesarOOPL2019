@@ -1,6 +1,5 @@
 package com.oopl.controller;
 
-import com.oopl.Main;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminPageController implements Initializable {
+public class EmployeePageController implements Initializable {
     @FXML
     private Pane contentArea;
     @FXML
@@ -27,7 +26,7 @@ public class AdminPageController implements Initializable {
 
     @FXML
     private void openHome(ActionEvent actionEvent) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("view/ManagerPage.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("view/ParkingManagerPage.fxml"));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
@@ -53,7 +52,7 @@ public class AdminPageController implements Initializable {
         Parent root = null;
         Stage primaryStage = new Stage();
         try {
-            root = FXMLLoader.load(getClass().getResource("../view/loginPage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../view/LoginEmployee.fxml"));
 
         } catch (IOException e) {
             e.printStackTrace();

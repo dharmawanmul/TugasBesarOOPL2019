@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="745.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopl.controller.employeeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="745.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopl.controller.ParkingManagerController">
    <children>
       <GridPane layoutY="33.0" prefHeight="276.0" prefWidth="774.0">
          <children>
@@ -95,7 +95,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <JFXTextField promptText="Search" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98">
+            <JFXTextField fx:id="searchField" promptText="Search" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98">
                <padding>
                   <Insets left="30.0" />
                </padding>
