@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane layoutY="26.0" prefHeight="321.0" prefWidth="774.0">
+         <children>
+            <Label text="NRP" />
+            <Label text="Registration number" GridPane.rowIndex="2" />
+            <Label text="Voucher" GridPane.rowIndex="4" />
+            <Label text="Permission" GridPane.rowIndex="6" />
+            <JFXTextField fx:id="txtNRP" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="NRP" stylesheets="@../css/stylesheet.css" GridPane.columnIndex="1" />
+            <JFXTextField fx:id="txtRegNo" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="Registration Number" stylesheets="@../css/stylesheet.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <JFXTextField fx:id="txtVoucher" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="Voucher" stylesheets="@../css/stylesheet.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <JFXTextField fx:id="txtPermission" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="Permission" stylesheets="@../css/stylesheet.css" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <children>
+                  <JFXButton prefHeight="33.0" prefWidth="84.0" text="Print">
+                     <graphic>
+                        <FontAwesomeIcon iconName="PRINT" size="1.5em" />
+                     </graphic>
+                     <font>
+                        <Font name="Ebrima Bold" size="15.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </HBox>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </GridPane>
+      <JFXTextArea fx:id="txtPrice" disable="true" layoutX="365.0" layoutY="347.0" prefHeight="99.0" prefWidth="395.0" stylesheets="@../css/stylesheet.css">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </JFXTextArea>
+   </children>
+</Pane>

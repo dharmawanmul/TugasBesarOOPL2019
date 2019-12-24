@@ -32,12 +32,6 @@
                                     <graphic>
                                         <FontAwesomeIcon iconName="HOME" size="1.5em" />
                                     </graphic>
-                                    <opaqueInsets>
-                                        <Insets />
-                                    </opaqueInsets>
-                                    <HBox.margin>
-                                        <Insets />
-                                    </HBox.margin>
                                 </JFXButton>
                             </children>
                         </HBox>
@@ -55,12 +49,24 @@
                         </HBox>
                   <HBox styleClass="menubar" stylesheets="@../css/stylesheet.css">
                      <children>
-                        <JFXButton alignment="BASELINE_LEFT" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openUserManagement" prefHeight="40.0" prefWidth="250.0" text="Manage Voucher">
+                        <JFXButton alignment="BASELINE_LEFT" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openVoucherManagement" prefHeight="40.0" prefWidth="250.0" text="Manage Voucher">
                            <font>
                               <Font name="Ebrima Bold" size="18.0" />
                            </font>
                            <graphic>
                               <FontAwesomeIcon iconName="TICKET" size="1.5em" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <HBox styleClass="menubar" stylesheets="@../css/stylesheet.css">
+                     <children>
+                        <JFXButton alignment="BASELINE_LEFT" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openPermissionManagement" prefHeight="40.0" prefWidth="250.0" text="Manage Permissions">
+                           <font>
+                              <Font name="Ebrima Bold" size="18.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon iconName="ENVELOPE" size="1.5em" />
                            </graphic>
                         </JFXButton>
                      </children>

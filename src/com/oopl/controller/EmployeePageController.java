@@ -1,6 +1,14 @@
 package com.oopl.controller;
 
+import com.oopl.dao.RoleDaoImpl;
+import com.oopl.dao.UserDaoImpl;
+import com.oopl.dao.VehicletypeDaoImpl;
+import com.oopl.entity.Role;
+import com.oopl.entity.User;
+import com.oopl.entity.Vehicletype;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +31,41 @@ public class EmployeePageController implements Initializable {
     private Pane contentArea;
     @FXML
     private Label labelName;
+    private ObservableList<Role> roles;
+    private ObservableList<Vehicletype> vehicles;
+
+    private RoleDaoImpl roleDao;
+    private VehicletypeDaoImpl vehicleDao;
+
+    public ObservableList<Role> getRole() {
+        if (roles == null) {
+            roles = FXCollections.observableArrayList();
+            roles.addAll(getRoleDao().showAll());
+        }
+        return roles;
+    }
+
+    public RoleDaoImpl getRoleDao() {
+        if (roleDao == null) {
+            roleDao = new RoleDaoImpl();
+        }
+        return roleDao;
+    }
+
+    public ObservableList<Vehicletype> getVehicles() {
+        if (vehicles == null) {
+            vehicles = FXCollections.observableArrayList();
+            vehicles.addAll(getVehicleDao().showAll());
+        }
+        return vehicles;
+    }
+
+    public VehicletypeDaoImpl getVehicleDao() {
+        if (vehicleDao == null) {
+            vehicleDao = new VehicletypeDaoImpl();
+        }
+        return vehicleDao;
+    }
 
     @FXML
     private void openHome(ActionEvent actionEvent) throws IOException {
@@ -53,7 +96,6 @@ public class EmployeePageController implements Initializable {
         Stage primaryStage = new Stage();
         try {
             root = FXMLLoader.load(getClass().getResource("../view/LoginEmployee.fxml"));
-
         } catch (IOException e) {
             e.printStackTrace();
         }

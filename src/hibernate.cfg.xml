@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/dbOOPL</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <mapping class="com.oopl.entity.Employee"/>
+        <mapping class="com.oopl.entity.Permissions"/>
+        <mapping class="com.oopl.entity.Role"/>
+        <mapping class="com.oopl.entity.Ticket"/>
+        <mapping class="com.oopl.entity.User"/>
+        <mapping class="com.oopl.entity.UserHasVehicletype"/>
+        <mapping class="com.oopl.entity.Userrole"/>
+        <mapping class="com.oopl.entity.Vehicletype"/>
+        <mapping class="com.oopl.entity.Voucher"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

@@ -67,13 +67,13 @@
                         <Font name="Ebrima Bold" size="14.0" />
                     </font>
                 </Label>
-                <JFXButton buttonType="RAISED" layoutX="100.0" layoutY="403.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#loginBtnClicked" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Login">
+                <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="100.0" layoutY="403.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loginClicked" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Login">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </JFXButton>
-            <JFXTextField labelFloat="true" layoutX="100.0" layoutY="239.0" prefHeight="33.0" prefWidth="300.0" promptText="Username" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" />
-            <JFXPasswordField labelFloat="true" layoutX="100.0" layoutY="300.0" prefHeight="31.0" prefWidth="300.0" promptText="Password" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" />
+            <JFXTextField fx:id="txtUsername" labelFloat="true" layoutX="100.0" layoutY="239.0" prefHeight="33.0" prefWidth="300.0" promptText="Username" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" />
+            <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="100.0" layoutY="300.0" onKeyPressed="#keyPressed" prefHeight="31.0" prefWidth="300.0" promptText="Password" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" />
             <FontAwesomeIcon fill="#5a547c" iconName="CLOSE" layoutX="468.0" layoutY="33.0" onMouseClicked="#onClicked" size="1.5em">
                <font>
                   <Font size="14.0" />
