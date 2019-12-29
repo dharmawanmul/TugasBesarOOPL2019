@@ -90,7 +90,7 @@ public class EmployeeDaoImpl implements DaoService<Employee> {
 
                 Role role = new Role();
                 role.setIdRole(rs.getInt("Role_idRole"));
-                emp.setRole(role);
+                emp.setRoleByRoleIdRole(role);
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -124,13 +124,13 @@ public class EmployeeDaoImpl implements DaoService<Employee> {
             ps.setString(2, object.getPassword());
             if (ps.executeUpdate() != 0) {
                 connection.commit();
-                if (object.getRole().getIdRole() == 1) {
+                if (object.getRoleByRoleIdRole().getIdRole() == 1) {
                     result = 1;
                 }
-                else if (object.getRole().getIdRole() == 2) {
+                else if (object.getRoleByRoleIdRole().getIdRole() == 2) {
                     result = 2;
                 }
-                else if (object.getRole().getIdRole() == 3) {
+                else if (object.getRoleByRoleIdRole().getIdRole() == 3) {
                     result = 3;
                 }
             } else {

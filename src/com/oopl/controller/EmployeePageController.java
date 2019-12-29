@@ -69,14 +69,14 @@ public class EmployeePageController implements Initializable {
 
     @FXML
     private void openHome(ActionEvent actionEvent) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("view/ParkingManagerPage.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("../view/overviewPage.fxml"));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
 
     @FXML
     private void openUserManagement(ActionEvent actionEvent) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("view/userManagement.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("../view/EmployeeManagement.fxml"));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
@@ -114,4 +114,6 @@ public class EmployeePageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+
 }

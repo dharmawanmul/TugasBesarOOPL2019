@@ -84,18 +84,17 @@ public class ParkingManagerController implements Initializable {
 //            });
 //        });
         tableUser.setItems(getUsersVehicles());
-        colName.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUser().getName()));
-        colNRP.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUser().getNrp()));
+        colName.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUserByUserNrp().getName()));
+        colNRP.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUserByUserNrp().getNrp()));
         colRegNo.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getRegistrationNo()));
         colRegNo2.setCellValueFactory(d -> new SimpleStringProperty());
-        colRole.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUser().getUserRole().getUserRole()));
+        colRole.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUserByUserNrp().getUserroleByUserRoleIdUserRole().getUserRole()));
     }
 
     @FXML
     private void tableClicked(MouseEvent mouseEvent) {
         selectedItems = tableUser.getSelectionModel().getSelectedItem();
-        txtName.setText(selectedItems.getUser().getName());
-        txtNRP.setText(selectedItems.getUser().getNrp());
+        txtName.setText(selectedItems.getUserByUserNrp().getName());
         txtRegNo.setText(selectedItems.getRegistrationNo());
         txtRegNo2.setText(selectedItems.getRegistrationNo());
     }
