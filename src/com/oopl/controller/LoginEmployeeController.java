@@ -78,7 +78,7 @@ public class LoginEmployeeController {
         employeeDao = new EmployeeDaoImpl();
         Employee res = employeeDao.loginEmployee(e);
         FXMLLoader loader = new FXMLLoader();
-        if (res.getRole().getIdRole() == 1) {
+        if (res.getRoleByRoleIdRole().getIdRole() == 1) {
             loader.setLocation(Main.class.getResource("view/EmployeePage.fxml"));
             loader.setRoot(null);
             Pane root = loader.load();
@@ -90,7 +90,7 @@ public class LoginEmployeeController {
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
-        } else if (res.getRole().getIdRole() == 2){
+        } else if (res.getRoleByRoleIdRole().getIdRole() == 2){
             loader.setLocation(Main.class.getResource("view/ParkingManagerPage.fxml"));
             loader.setRoot(null);
             Pane root = loader.load();
@@ -102,8 +102,8 @@ public class LoginEmployeeController {
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
-        } else if (res.getRole().getIdRole() == 3) {
-            loader.setLocation(Main.class.getResource("view/parkingAttendants.fxml"));
+        } else if (res.getRoleByRoleIdRole().getIdRole() == 3) {
+            loader.setLocation(Main.class.getResource("view/ParkingAttendants.fxml"));
             loader.setRoot(null);
             Pane root = loader.load();
 
