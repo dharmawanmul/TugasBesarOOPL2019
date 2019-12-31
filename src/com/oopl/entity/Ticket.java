@@ -10,7 +10,11 @@ public class Ticket {
     private Timestamp dateIn;
     private Timestamp dateOut;
     private double price;
-    private UserHasVehicletype userHasVehicletype;
+    private double total;
+    private Voucher ticketVoucher;
+    private Permissions ticketPermission;
+    private StationHasEmployee ticketStation;
+    private UserHasVehicle userVehicle;
 
     @Id
     @Column(name = "idTicket", nullable = false, length = 100)
@@ -52,12 +56,23 @@ public class Ticket {
         this.price = price;
     }
 
+    @Basic
+    @Column(name = "total", nullable = false, precision = 0)
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
         return Double.compare(ticket.price, price) == 0 &&
+                Double.compare(ticket.total, total) == 0 &&
                 Objects.equals(idTicket, ticket.idTicket) &&
                 Objects.equals(dateIn, ticket.dateIn) &&
                 Objects.equals(dateOut, ticket.dateOut);
@@ -65,16 +80,46 @@ public class Ticket {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTicket, dateIn, dateOut, price);
+        return Objects.hash(idTicket, dateIn, dateOut, price, total);
     }
 
     @ManyToOne
-    @JoinColumns({@JoinColumn(name = "User_has_VehicleType_User_NRP", referencedColumnName = "User_NRP", nullable = false), @JoinColumn(name = "User_has_VehicleType_VehicleType_idType", referencedColumnName = "VehicleType_idType", nullable = false), @JoinColumn(name = "User_has_VehicleType_registration_no", referencedColumnName = "registration_no", nullable = false)})
-    public UserHasVehicletype getUserHasVehicletype() {
-        return userHasVehicletype;
+    @JoinColumn(name = "Voucher_idVoucher", referencedColumnName = "idVoucher", nullable = false)
+    public Voucher getTicketVoucher() {
+        return ticketVoucher;
     }
 
-    public void setUserHasVehicletype(UserHasVehicletype userHasVehicletype) {
-        this.userHasVehicletype = userHasVehicletype;
+    public void setTicketVoucher(Voucher ticketVoucher) {
+        this.ticketVoucher = ticketVoucher;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Permissions_idPermissions", referencedColumnName = "idPermissions", nullable = false)
+    public Permissions getTicketPermission() {
+        return ticketPermission;
+    }
+
+    public void setTicketPermission(Permissions ticketPermission) {
+        this.ticketPermission = ticketPermission;
+    }
+
+    @ManyToOne
+    @JoinColumns({@JoinColumn(name = "Station_has_Employee_Station_idStation", referencedColumnName = "Station_idStation", nullable = false), @JoinColumn(name = "Station_has_Employee_Employee_idEmployee", referencedColumnName = "Employee_idEmployee", nullable = false)})
+    public StationHasEmployee getTicketStation() {
+        return ticketStation;
+    }
+
+    public void setTicketStation(StationHasEmployee ticketStation) {
+        this.ticketStation = ticketStation;
+    }
+
+    @ManyToOne
+    @JoinColumns({@JoinColumn(name = "User_has_Vehicle_User_NRP", referencedColumnName = "User_NRP", nullable = false), @JoinColumn(name = "User_has_Vehicle_Vehicle_registrationNum", referencedColumnName = "Vehicle_registrationNum", nullable = false)})
+    public UserHasVehicle getUserVehicle() {
+        return userVehicle;
+    }
+
+    public void setUserVehicle(UserHasVehicle userVehicle) {
+        this.userVehicle = userVehicle;
     }
 }

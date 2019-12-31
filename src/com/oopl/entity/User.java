@@ -6,8 +6,8 @@ import java.util.Objects;
 @Entity
 public class User {
     private String nrp;
-    private String name;
-    private Userrole userroleByUserRoleIdUserRole;
+    private Userrole userRole;
+    private String userName;
 
     @Id
     @Column(name = "NRP", nullable = false, length = 45)
@@ -19,37 +19,36 @@ public class User {
         this.nrp = nrp;
     }
 
-    @Basic
-    @Column(name = "name", nullable = false, length = 50)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(nrp, user.nrp) &&
-                Objects.equals(name, user.name);
+        return Objects.equals(nrp, user.nrp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nrp, name);
+        return Objects.hash(nrp);
     }
 
     @ManyToOne
     @JoinColumn(name = "UserRole_idUserRole", referencedColumnName = "idUserRole", nullable = false)
-    public Userrole getUserroleByUserRoleIdUserRole() {
-        return userroleByUserRoleIdUserRole;
+    public Userrole getUserRole() {
+        return userRole;
     }
 
-    public void setUserroleByUserRoleIdUserRole(Userrole userroleByUserRoleIdUserRole) {
-        this.userroleByUserRoleIdUserRole = userroleByUserRoleIdUserRole;
+    public void setUserRole(Userrole userRole) {
+        this.userRole = userRole;
+    }
+
+    @Basic
+    @Column(name = "userName", nullable = false, length = 50)
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

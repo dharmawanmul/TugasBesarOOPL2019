@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="dbOOPL@localhost" uuid="c35b2aca-0659-45d9-9c39-ab8a1cab2869">
+    <data-source source="LOCAL" name="dboopl@localhost" uuid="c35b2aca-0659-45d9-9c39-ab8a1cab2869">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/dbOOPL</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/dboopl</jdbc-url>
       <driver-properties>
         <property name="serverTimezone" value="UTC" />
       </driver-properties>
       <time-zone>Asia/Jakarta</time-zone>
+    </data-source>
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="188fbc00-cffd-4466-8ff1-964c853cb9b1">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+D:/Programming Projects/intelliJ/TugasBesarOOPL2019/src/hibernate.cfg.xml</remarks>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/dboopl</jdbc-url>
     </data-source>
   </component>
 </project>

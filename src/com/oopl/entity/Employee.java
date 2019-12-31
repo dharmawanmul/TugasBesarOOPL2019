@@ -9,7 +9,7 @@ public class Employee {
     private String name;
     private String username;
     private String password;
-    private Role roleByRoleIdRole;
+    private Role employeeRole;
 
     @Id
     @Column(name = "idEmployee", nullable = false)
@@ -69,11 +69,11 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "Role_idRole", referencedColumnName = "idRole", nullable = false)
-    public Role getRoleByRoleIdRole() {
-        return roleByRoleIdRole;
+    public Role getEmployeeRole() {
+        return employeeRole;
     }
 
-    public void setRoleByRoleIdRole(Role roleByRoleIdRole) {
-        this.roleByRoleIdRole = roleByRoleIdRole;
+    public void setEmployeeRole(Role employeeRole) {
+        this.employeeRole = employeeRole;
     }
 }

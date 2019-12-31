@@ -1,15 +1,10 @@
 package com.oopl.dao;
 
 import com.oopl.entity.User;
-import com.oopl.util.DBHelper;
 import com.oopl.util.DaoService;
 import com.oopl.util.HibernateUtil;
 import org.hibernate.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

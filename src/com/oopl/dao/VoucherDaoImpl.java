@@ -1,6 +1,5 @@
 package com.oopl.dao;
 
-import com.oopl.entity.Employee;
 import com.oopl.entity.Voucher;
 import com.oopl.util.DaoService;
 import com.oopl.util.HibernateUtil;

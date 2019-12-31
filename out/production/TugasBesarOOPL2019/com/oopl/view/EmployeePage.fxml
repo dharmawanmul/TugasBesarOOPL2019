@@ -95,12 +95,12 @@
                </padding></HBox>
             <Pane fx:id="contentArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="774.0" VBox.vgrow="ALWAYS">
                <children>
-                  <LineChart horizontalGridLinesVisible="false" layoutX="15.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="744.0">
+                  <LineChart fx:id="lineChart" horizontalGridLinesVisible="false" layoutX="15.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="744.0">
                      <xAxis>
-                        <CategoryAxis side="BOTTOM" />
+                        <CategoryAxis fx:id="C" side="BOTTOM" />
                      </xAxis>
                      <yAxis>
-                        <NumberAxis side="LEFT" />
+                        <NumberAxis fx:id="N" side="LEFT" upperBound="275.0" />
                      </yAxis>
                   </LineChart>
                </children></Pane>

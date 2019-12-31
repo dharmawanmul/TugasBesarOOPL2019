@@ -24,7 +24,7 @@ public class Permissions {
     }
 
     @Basic
-    @Column(name = "date_start", nullable = true)
+    @Column(name = "date_start", nullable = false)
     public Timestamp getDateStart() {
         return dateStart;
     }
@@ -34,7 +34,7 @@ public class Permissions {
     }
 
     @Basic
-    @Column(name = "date_end", nullable = true)
+    @Column(name = "date_end", nullable = false)
     public Timestamp getDateEnd() {
         return dateEnd;
     }

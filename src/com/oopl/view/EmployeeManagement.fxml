@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane prefHeight="540.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopl.controller.EmployeeManagementController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="774.0" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopl.controller.EmployeeManagementController">
    <children>
       <GridPane layoutY="14.0" prefHeight="236.0" prefWidth="774.0">
          <columnConstraints>
@@ -37,6 +37,28 @@
             <JFXPasswordField fx:id="txtRePass" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="560.0" promptText="Password" stylesheets="@../css/stylesheet.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
+      <HBox alignment="CENTER" layoutY="255.0" prefHeight="49.0" prefWidth="774.0" spacing="10.0">
+         <children>
+            <FontAwesomeIcon iconName="SEARCH" size="1.5em" />
+            <JFXTextField fx:id="txtSearch" labelFloat="true" prefHeight="37.0" prefWidth="385.0" promptText="Search" stylesheets="@../css/stylesheet.css">
+            </JFXTextField>
+            <JFXButton fx:id="saveBtn" onAction="#saveAct" text="Save">
+               <graphic>
+                  <FontAwesomeIcon iconName="SAVE" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="updateBtn" onAction="#updateAct" text="Update">
+               <graphic>
+                  <FontAwesomeIcon iconName="REFRESH" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="deleteBtn" onAction="#deleteAct" text="Delete">
+               <graphic>
+                  <FontAwesomeIcon iconName="TRASH_ALT" size="1.5em" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
       <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="304.0" prefHeight="236.0" prefWidth="774.0" vbarPolicy="NEVER">
          <content>
             <TableView fx:id="tableEmployee" prefHeight="245.0" prefWidth="774.0">
@@ -51,27 +73,5 @@
             </TableView>
          </content>
       </ScrollPane>
-      <HBox alignment="CENTER" layoutY="255.0" prefHeight="49.0" prefWidth="774.0" spacing="10.0">
-         <children>
-            <FontAwesomeIcon iconName="SEARCH" size="1.5em" />
-            <JFXTextField fx:id="txtSearch" labelFloat="true" prefHeight="37.0" prefWidth="385.0" promptText="Search" stylesheets="@../css/stylesheet.css">
-            </JFXTextField>
-            <JFXButton fx:id="saveBtn" text="Save">
-               <graphic>
-                  <FontAwesomeIcon iconName="SAVE" size="1.5em" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="updateBtn" text="Update">
-               <graphic>
-                  <FontAwesomeIcon iconName="REFRESH" size="1.5em" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="deleteBtn" text="Delete">
-               <graphic>
-                  <FontAwesomeIcon iconName="TRASH_ALT" size="1.5em" />
-               </graphic>
-            </JFXButton>
-         </children>
-      </HBox>
    </children>
-</Pane>
+</VBox>

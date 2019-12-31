@@ -4,18 +4,21 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/dbOOPL</property>
-        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/dboopl</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">root</property>
         <mapping class="com.oopl.entity.Employee"/>
         <mapping class="com.oopl.entity.Permissions"/>
         <mapping class="com.oopl.entity.Role"/>
         <mapping class="com.oopl.entity.Ticket"/>
         <mapping class="com.oopl.entity.User"/>
-        <mapping class="com.oopl.entity.UserHasVehicletype"/>
         <mapping class="com.oopl.entity.Userrole"/>
-        <mapping class="com.oopl.entity.Vehicletype"/>
         <mapping class="com.oopl.entity.Voucher"/>
-        <!-- <property name="connection.username"/> -->
+        <mapping class="com.oopl.entity.Station"/>
+        <mapping class="com.oopl.entity.StationHasEmployee"/>
+        <mapping class="com.oopl.entity.UserHasVehicle"/>
+        <mapping class="com.oopl.entity.Vehicle"/>
+
         <!-- <property name="connection.password"/> -->
 
         <!-- DB schema will be updated if needed -->
