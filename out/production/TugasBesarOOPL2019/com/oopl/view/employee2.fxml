@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -32,6 +31,12 @@
                                     <graphic>
                                         <FontAwesomeIcon iconName="HOME" size="1.5em" />
                                     </graphic>
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
                                 </JFXButton>
                             </children>
                         </HBox>
@@ -47,30 +52,6 @@
                                 </JFXButton>
                             </children>
                         </HBox>
-                  <HBox styleClass="menubar" stylesheets="@../css/stylesheet.css">
-                     <children>
-                        <JFXButton alignment="BASELINE_LEFT" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openVoucherManagement" prefHeight="40.0" prefWidth="250.0" text="Manage Voucher">
-                           <font>
-                              <Font name="Ebrima Bold" size="18.0" />
-                           </font>
-                           <graphic>
-                              <FontAwesomeIcon iconName="TICKET" size="1.5em" />
-                           </graphic>
-                        </JFXButton>
-                     </children>
-                  </HBox>
-                  <HBox styleClass="menubar" stylesheets="@../css/stylesheet.css">
-                     <children>
-                        <JFXButton alignment="BASELINE_LEFT" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openPermissionManagement" prefHeight="40.0" prefWidth="250.0" text="Manage Permissions">
-                           <font>
-                              <Font name="Ebrima Bold" size="18.0" />
-                           </font>
-                           <graphic>
-                              <FontAwesomeIcon iconName="ENVELOPE" size="1.5em" />
-                           </graphic>
-                        </JFXButton>
-                     </children>
-                  </HBox>
                         <HBox layoutY="210.0" styleClass="menubar" stylesheets="@../css/stylesheet.css">
                             <children>
                                 <JFXButton alignment="BASELINE_LEFT" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#openReport" prefHeight="40.0" prefWidth="250.0" text="Reports">
@@ -97,12 +78,6 @@
                         </HBox>
                     </children>
                 </VBox>
-            <Label layoutX="16.0" layoutY="545.0" text="© Mulyadi &amp; Nicolavickh" />
-            <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="63.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/parking.png" />
-               </image>
-            </ImageView>
             </children></Pane>
         <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" HBox.hgrow="ALWAYS">
             <children>
@@ -117,17 +92,7 @@
                     <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </padding></HBox>
-                <Pane fx:id="contentArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="774.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <LineChart horizontalGridLinesVisible="false" layoutX="15.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="744.0">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </LineChart>
-               </children></Pane>
+                <Pane fx:id="contentArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="774.0" VBox.vgrow="ALWAYS" />
             </children>
         </VBox>
     </children>

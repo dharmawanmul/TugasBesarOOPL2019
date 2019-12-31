@@ -2,13 +2,15 @@ package com.oopl.dao;
 
 import com.oopl.entity.Employee;
 import com.oopl.entity.Role;
-import com.oopl.entity.User;
 import com.oopl.util.DBHelper;
 import com.oopl.util.DaoService;
 import com.oopl.util.HibernateUtil;
 import org.hibernate.*;
-import org.jboss.jandex.Result;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +26,23 @@ public class EmployeeDaoImpl implements DaoService<Employee> {
         Criteria criteria = session.createCriteria(Employee.class);
         employees.addAll(criteria.list());
         return employees;
+
+//        Session session = HibernateUtil.getSession();
+//        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+//        CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+//        Root<Employee> root = criteriaQuery.from(Employee.class);
+//        criteriaQuery.select(root);
+//        Query<Employee> query = session.createQuery(criteriaQuery);
+//        List<Employee> employees = query.getResultList();
+//        return employees;
+
+//        CriteriaBuilder cb = HibernateUtil.getSession().getCriteriaBuilder();
+//        CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
+//        Root<Employee> rootEntry = cq.from(Employee.class);
+//        CriteriaQuery<Employee> all = cq.select(rootEntry);
+//
+//        TypedQuery<Employee> allQuery = HibernateUtil.getSession().createQuery(all);
+//        return allQuery.getResultList();
     }
 
     @Override
@@ -90,56 +109,11 @@ public class EmployeeDaoImpl implements DaoService<Employee> {
 
                 Role role = new Role();
                 role.setIdRole(rs.getInt("Role_idRole"));
-                emp.setRole(role);
+                emp.setEmployeeRole(role);
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return emp;
     }
-//public Employee userLogin(String username, String password) {
-//    Session session = null;
-//    Employee employee = null;
-//    try {
-//        session = HibernateUtil.getSession();
-//        employee = (Employee)session.get(Employee.class, username);
-//        Hibernate.initialize(employee);
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//    } finally {
-//        if (session != null && session.isOpen()) {
-//            session.close();
-//        }
-//    }
-//    return employee;
-//}
-
-    public int validateEmployee(Employee object) {
-        int result = 0;
-        try {
-            Connection connection = DBHelper.createMySQLConnection();
-            String query = "SELECT * from employee WHERE username = ? AND password = ?";
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, object.getUsername());
-            ps.setString(2, object.getPassword());
-            if (ps.executeUpdate() != 0) {
-                connection.commit();
-                if (object.getRole().getIdRole() == 1) {
-                    result = 1;
-                }
-                else if (object.getRole().getIdRole() == 2) {
-                    result = 2;
-                }
-                else if (object.getRole().getIdRole() == 3) {
-                    result = 3;
-                }
-            } else {
-                connection.rollback();
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
 }
