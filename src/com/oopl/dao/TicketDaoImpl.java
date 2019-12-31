@@ -1,6 +1,7 @@
 package com.oopl.dao;
 
 import com.oopl.entity.Ticket;
+import com.oopl.entity.Voucher;
 import com.oopl.util.DaoService;
 import com.oopl.util.HibernateUtil;
 import org.hibernate.Criteria;

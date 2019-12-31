@@ -1,5 +1,6 @@
 package com.oopl.dao;
 
+import com.oopl.entity.Permissions;
 import com.oopl.entity.Userrole;
 import com.oopl.util.DaoService;
 import com.oopl.util.HibernateUtil;

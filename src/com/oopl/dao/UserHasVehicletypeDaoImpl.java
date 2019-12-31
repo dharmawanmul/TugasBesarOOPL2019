@@ -1,41 +1,29 @@
 package com.oopl.dao;
 
-import com.oopl.entity.UserHasVehicle;
+import com.oopl.entity.Permissions;
+import com.oopl.entity.UserHasVehicletype;
 import com.oopl.util.DaoService;
 import com.oopl.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserHasVehicleDaoImpl implements DaoService<UserHasVehicle> {
+public class UserHasVehicletypeDaoImpl implements DaoService<UserHasVehicletype> {
     @Override
-    public List<UserHasVehicle> showAll() {
-//        List<UserHasVehicle> userHasVehicle = new ArrayList<>();
-//        Session session = HibernateUtil.getSession();
-//        Criteria criteria = session.createCriteria(UserHasVehicle.class);
-//        userHasVehicle.addAll(criteria.list());
-//        return userHasVehicle;
-
+    public List<UserHasVehicletype> showAll() {
+        List<UserHasVehicletype> userHasVehicletypes = new ArrayList<>();
         Session session = HibernateUtil.getSession();
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<UserHasVehicle> criteriaQuery = criteriaBuilder.createQuery(UserHasVehicle.class);
-        Root<UserHasVehicle> root = criteriaQuery.from(UserHasVehicle.class);
-        criteriaQuery.select(root);
-        Query<UserHasVehicle> query = session.createQuery(criteriaQuery);
-        List<UserHasVehicle> userHasVehicle = query.getResultList();
-        return userHasVehicle;
+        Criteria criteria = session.createCriteria(UserHasVehicletype.class);
+        userHasVehicletypes.addAll(criteria.list());
+        return userHasVehicletypes;
     }
 
     @Override
-    public int addData(UserHasVehicle object) {
+    public int addData(UserHasVehicletype object) {
         int result = 0;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -51,7 +39,7 @@ public class UserHasVehicleDaoImpl implements DaoService<UserHasVehicle> {
     }
 
     @Override
-    public int deleteData(UserHasVehicle object) {
+    public int deleteData(UserHasVehicletype object) {
         int result = 0;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -67,7 +55,7 @@ public class UserHasVehicleDaoImpl implements DaoService<UserHasVehicle> {
     }
 
     @Override
-    public int updateData(UserHasVehicle object) {
+    public int updateData(UserHasVehicletype object) {
         int result = 0;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();

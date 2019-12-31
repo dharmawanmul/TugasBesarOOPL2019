@@ -1,7 +1,7 @@
 package com.oopl.dao;
 
-import com.oopl.entity.Employee;
-import com.oopl.entity.Voucher;
+import com.oopl.entity.Permissions;
+import com.oopl.entity.Vehicletype;
 import com.oopl.util.DaoService;
 import com.oopl.util.HibernateUtil;
 import org.hibernate.Criteria;
@@ -12,18 +12,18 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VoucherDaoImpl implements DaoService<Voucher> {
+public class VehicletypeDaoImpl implements DaoService<Vehicletype> {
     @Override
-    public List<Voucher> showAll() {
-        List<Voucher> vouchers = new ArrayList<>();
+    public List<Vehicletype> showAll() {
+        List<Vehicletype> vehicletypes = new ArrayList<>();
         Session session = HibernateUtil.getSession();
-        Criteria criteria = session.createCriteria(Voucher.class);
-        vouchers.addAll(criteria.list());
-        return vouchers;
+        Criteria criteria = session.createCriteria(Vehicletype.class);
+        vehicletypes.addAll(criteria.list());
+        return vehicletypes;
     }
 
     @Override
-    public int addData(Voucher object) {
+    public int addData(Vehicletype object) {
         int result = 0;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -39,7 +39,7 @@ public class VoucherDaoImpl implements DaoService<Voucher> {
     }
 
     @Override
-    public int deleteData(Voucher object) {
+    public int deleteData(Vehicletype object) {
         int result = 0;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -55,7 +55,7 @@ public class VoucherDaoImpl implements DaoService<Voucher> {
     }
 
     @Override
-    public int updateData(Voucher object) {
+    public int updateData(Vehicletype object) {
         int result = 0;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
