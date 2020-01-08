@@ -6,8 +6,9 @@ import java.util.Objects;
 @Entity
 public class User {
     private String nrp;
-    private Userrole userRole;
     private String userName;
+    private Userrole userroleByUserRoleIdUserRole;
+    private Vehicle vehicleByVehicleRegistrationNum;
 
     @Id
     @Column(name = "NRP", nullable = false, length = 45)
@@ -19,29 +20,6 @@ public class User {
         this.nrp = nrp;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(nrp, user.nrp);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nrp);
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "UserRole_idUserRole", referencedColumnName = "idUserRole", nullable = false)
-    public Userrole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(Userrole userRole) {
-        this.userRole = userRole;
-    }
-
     @Basic
     @Column(name = "userName", nullable = false, length = 50)
     public String getUserName() {
@@ -50,5 +28,39 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(nrp, user.nrp) &&
+                Objects.equals(userName, user.userName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nrp, userName);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "UserRole_idUserRole", referencedColumnName = "idUserRole", nullable = false)
+    public Userrole getUserroleByUserRoleIdUserRole() {
+        return userroleByUserRoleIdUserRole;
+    }
+
+    public void setUserroleByUserRoleIdUserRole(Userrole userroleByUserRoleIdUserRole) {
+        this.userroleByUserRoleIdUserRole = userroleByUserRoleIdUserRole;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Vehicle_registrationNum", referencedColumnName = "registrationNum", nullable = false)
+    public Vehicle getVehicleByVehicleRegistrationNum() {
+        return vehicleByVehicleRegistrationNum;
+    }
+
+    public void setVehicleByVehicleRegistrationNum(Vehicle vehicleByVehicleRegistrationNum) {
+        this.vehicleByVehicleRegistrationNum = vehicleByVehicleRegistrationNum;
     }
 }

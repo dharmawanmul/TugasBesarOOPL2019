@@ -4,24 +4,44 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.oopl.Main;
+import com.oopl.dao.EmployeeDaoImpl;
+import com.oopl.dao.RoleDaoImpl;
 import com.oopl.entity.Employee;
 import com.oopl.entity.Role;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.*;
+import javafx.stage.*;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.*;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EmployeeManagementController implements Initializable {
-    @FXML
-    private JFXTextField searchField;
     @FXML
     private JFXButton updateBtn;
     @FXML
@@ -29,11 +49,15 @@ public class EmployeeManagementController implements Initializable {
     @FXML
     private TableView<Employee> tableEmployee;
     @FXML
-    private TableColumn<Employee, String> col01;
+    private TableColumn<Employee, ImageView> colPhotos;
     @FXML
-    private TableColumn<Employee, String> col02;
+    private TableColumn<Employee, String> colName;
     @FXML
-    private TableColumn<Employee, String> col03;
+    private TableColumn<Employee, String> colUsername;
+    @FXML
+    private TableColumn<Employee, String> colPosition;
+    @FXML
+    private TableColumn<Employee, String> colEmpId;
     @FXML
     private JFXComboBox<Role> cmbxRole;
     @FXML
@@ -50,54 +74,329 @@ public class EmployeeManagementController implements Initializable {
     private JFXButton saveBtn;
     @FXML
     private JFXButton deleteBtn;
-    private EmployeePageController mainFormController;
     private final ObservableList<Employee> dataList = FXCollections.observableArrayList();
-//    @FXML
-//    private VBox vbox;
+    @FXML
+    private VBox vbox;
+    private RoleDaoImpl roleDao;
+    private ObservableList<Role> roles;
+    private EmployeeDaoImpl employeeDao;
+    private ObservableList<Employee> employees;
+    @FXML
+    private JFXButton uploadBtn;
+    @FXML
+    private JFXButton removeBtn;
+    @FXML
+    private ImageView imgChecker;
+    @FXML
+    private Label imgMessageLabel;
+    private FileChooser fileChooser;
+    private File file;
+    private String imageName;
+    private Path copy,files;
+    @FXML
+    private Label lblRePass;
+    private Alert alert = new Alert(Alert.AlertType.ERROR);
+    private Employee selectedItems;
+    @FXML
+    private HBox dragTarget;
+
+
+    public ObservableList<Role> getRole() {
+        if (roles == null) {
+            roles = FXCollections.observableArrayList();
+            roles.addAll(getRoleDao().showAll());
+        }
+        return roles;
+    }
+
+    public RoleDaoImpl getRoleDao() {
+        if (roleDao == null) {
+            roleDao = new RoleDaoImpl();
+        }
+        return roleDao;
+    }
+
+    public ObservableList<Employee> getEmployees() {
+        if (employees == null) {
+            employees = FXCollections.observableArrayList();
+            employees.addAll(getEmployeeDao().showAll());
+        }
+        return employees;
+    }
+
+    public EmployeeDaoImpl getEmployeeDao() {
+        if (employeeDao == null) {
+            employeeDao = new EmployeeDaoImpl();
+        }
+        return employeeDao;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        vbox.setVgrow(tableEmployee, Priority.ALWAYS);
-//        FilteredList<Employee> filteredData = new FilteredList<>(dataList, b -> true);
-//
-//        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-//            filteredData.setPredicate(employee -> {
-//
-//                if (newValue == null || newValue.isEmpty()) {
-//                    return true;
-//                }
-//
-//                String lowerCaseFilter = newValue.toLowerCase();
-//
-//                if (employee.getName().toLowerCase().contains(lowerCaseFilter)) {
-//                    return true; // Filter matches first name.
-//                } else if (employee.getUsername().toLowerCase().contains(lowerCaseFilter)) {
-//                    return true; // Filter matches last name.
-//                } else if (employee.getRoleByRoleIdRole().getRole().toLowerCase().contains(lowerCaseFilter)) {
-//                    return true; // Filter matches last name.
-//                }
-//                else
-//                    return false; // Does not match.
-//            });
-//        });
-//
-//        SortedList<Employee> sortedData = new SortedList<>(filteredData);
-//
-//        sortedData.comparatorProperty().bind(tableEmployee.comparatorProperty());
-//
-//        tableEmployee.setItems(sortedData);
-//        cmbxRole.setItems(mainFormController.getRole());
 
-        col01.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getName()));
-        col02.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUsername()));
-        col03.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getEmployeeRole().getRole()));
+        fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png","*.jpg")
+        );
+
+        dataList.addAll(getEmployees());
+        FilteredList<Employee> filteredData = new FilteredList<>(dataList, b -> true);
+
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(employee -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (employee.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (employee.getUsername().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (employee.getRoleByRoleIdRole().getRole().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                else
+                    return false;
+            });
+        });
+        SortedList<Employee> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(tableEmployee.comparatorProperty());
+
+        tableEmployee.setItems(sortedData);
+
+        txtPass.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!txtPass.getText().equals(txtRePass.getText())) {
+                    lblRePass.setStyle("-fx-text-fill: red");
+                    lblRePass.setText("Password Didn't Match");
+                } else {
+                    lblRePass.getStyleClass().clear();
+                    lblRePass.setText("");
+                }
+            }
+        });
+
+        cmbxRole.setItems(getRole());
+
+        colPhotos.setMaxWidth(1350);
+        colPhotos.setCellValueFactory(d -> new SimpleObjectProperty<ImageView>(loadImage(new Image(this.getClass().getResourceAsStream(d.getValue().getPhotos())))));
+        colEmpId.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getIdEmployee().toString()));
+        colName.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getName()));
+        colUsername.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUsername()));
+        colPosition.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getRoleByRoleIdRole().getRole()));
     }
 
-    public void setMainFormController(EmployeePageController mainFormController) {
-        this.mainFormController = mainFormController;
-//        dataList.addAll(mainFormController.getEmployees());
-        tableEmployee.setItems(mainFormController.getEmployees());
+    private ImageView loadImage(Image image) {
+        ImageView imageView= new ImageView();
+        imageView.setFitHeight(100);
+        imageView.setFitWidth(80);
+        imageView.setImage(image);
+
+        return imageView;
     }
 
 
+    @FXML
+    private void saveAct(ActionEvent actionEvent) {
+        Employee e = new Employee();
+        e.setName(txtName.getText());
+        e.setPassword(txtPass.getText());
+        e.setUsername(txtUsername.getText());
+        e.setPhotos(imageName);
+        e.setRoleByRoleIdRole(cmbxRole.getSelectionModel().getSelectedItem());
+        if (txtName.getText().isEmpty()) {
+            alert.setTitle("Error");
+            alert.setContentText("Employee name cannot be empty");
+            alert.showAndWait();
+        } else if (txtUsername.getText().isEmpty()) {
+            alert.setTitle("Error");
+            alert.setContentText("Username cannot be empty");
+            alert.showAndWait();
+        } else if (txtPass.getText().isEmpty()) {
+            alert.setTitle("Error");
+            alert.setContentText("Password cannot be empty");
+            alert.showAndWait();
+        } else if (txtRePass.getText().isEmpty()) {
+            alert.setTitle("Error");
+            alert.setContentText("Password cannot be empty");
+            alert.showAndWait();
+        } else if (!txtPass.getText().equals(txtRePass.getText())) {
+            alert.setTitle("Error");
+            alert.setContentText("Password didn't match");
+            alert.showAndWait();
+        } else if (cmbxRole.getValue() == null) {
+            alert.setTitle("Error");
+            alert.setContentText("Employee role cannot be empty");
+            alert.showAndWait();
+        } else if (imageName == null) {
+            alert.setTitle("Error");
+            alert.setContentText("Please choose employee's photo");
+            alert.showAndWait();
+        } else {
+            try {
+                employeeDao.addData(e);
+                File dir = new File(System.getProperty("user.dir"));
+                copy = Paths.get(dir + "/src/com/oopl/images/" + imageName);
+                CopyOption[] options = new CopyOption[]{
+                        StandardCopyOption.REPLACE_EXISTING,
+                        StandardCopyOption.COPY_ATTRIBUTES
+                };
+                clearForm();
+                refreshTable();
+                Files.copy(files, copy, options);
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    @FXML
+    private void updateAct(ActionEvent actionEvent) {
+        selectedItems.setName(txtName.getText());
+        selectedItems.setUsername(txtUsername.getText());
+        selectedItems.setPassword(txtPass.getText());
+        if (txtPass.getText().equals(txtRePass.getText())) {
+            selectedItems.setRoleByRoleIdRole(cmbxRole.getSelectionModel().getSelectedItem());
+            getEmployeeDao().updateData(selectedItems);
+            clearForm();
+            refreshTable();
+        } else {
+            alert.setTitle("Error");
+            alert.setContentText("Password didn't match");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void deleteAct(ActionEvent actionEvent) {
+        if (tableEmployee.getItems().isEmpty()) {
+            refreshTable();
+        } else {
+            Alert deleteConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            deleteConfirmation.setContentText("Are you sure you want to delete this data ?");
+            deleteConfirmation.setTitle("Removal Confirmation");
+            deleteConfirmation.showAndWait();
+            if (deleteConfirmation.getResult() == ButtonType.OK) {
+                selectedItems = tableEmployee.getSelectionModel().getSelectedItem();
+                getEmployeeDao().deleteData(selectedItems);
+                refreshTable();
+                clearForm();
+            }
+        }
+    }
+
+    @FXML
+    private void uploadAct(ActionEvent actionEvent) {
+        fileChooser.setTitle("Choose File");
+        file =  fileChooser.showOpenDialog(null);
+        if(file != null){
+            try {
+                BufferedImage bufferedImage = ImageIO.read(file);
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                imgChecker.setPreserveRatio(true);
+                imgChecker.setImage(new Image(file.getName()));
+                imgMessageLabel.setText("Files added");
+//                Stage stage = new Stage();
+//                stage.initOwner(stage);
+//                stage.initStyle(StageStyle.UNDECORATED);
+//                ImageView preview = new ImageView();
+//                preview.setFitHeight(300);
+//                preview.setFitWidth(250);
+//                preview.setImage(image);
+//
+//                StackPane stackPane = new StackPane();
+//                stackPane.setPrefSize(250, 500);
+//                stackPane.getChildren().addAll(preview);
+//                stage.setScene(new Scene(stackPane));
+//                imgChecker.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+//                    if (newValue) {
+//                        stage.show();
+//                    } else {
+//                        stage.hide();
+//                    }
+//                });
+                imageName = file.getName();
+                files = Paths.get(file.toURI());
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    @FXML
+    private void onClicked(MouseEvent mouseEvent) {
+        saveBtn.setDisable(true);
+        updateBtn.setDisable(false);
+        deleteBtn.setDisable(false);
+        selectedItems = tableEmployee.getSelectionModel().getSelectedItem();
+        txtName.setText(selectedItems.getName());
+        txtUsername.setText(selectedItems.getUsername());
+        cmbxRole.setValue(selectedItems.getRoleByRoleIdRole());
+        imgChecker.setPreserveRatio(true);
+        imgChecker.setImage(new Image(this.getClass().getResourceAsStream(selectedItems.getPhotos())));
+    }
+
+    @FXML
+    private void refreshAct(ActionEvent actionEvent) {
+        imgChecker.setImage(null);
+        imgMessageLabel.setText("");
+        clearForm();
+        refreshTable();
+    }
+
+    private void clearForm() {
+        txtName.clear();
+        txtUsername.clear();
+        txtPass.clear();
+        txtRePass.clear();
+        txtSearch.clear();
+        cmbxRole.setValue(null);
+        tableEmployee.getSelectionModel().clearSelection();
+        selectedItems = null;
+        dragTarget.getStyleClass().clear();
+        imgMessageLabel.setText("");
+        lblRePass.setText("");
+        lblRePass.getStyleClass().clear();
+        imgChecker.setImage(null);
+        //
+        imageName = null;
+    }
+
+    private void refreshTable() {
+        getEmployees().clear();
+        getEmployees().addAll(getEmployeeDao().showAll());
+    }
+
+    @FXML
+    private void droppedAct(DragEvent dragEvent) {
+        Dragboard db = dragEvent.getDragboard();
+        if (db.hasFiles()) {
+            File file = db.getFiles().get(0);
+        }
+        dragEvent.consume();
+        imgChecker.setPreserveRatio(true);
+        imgChecker.setImage(new Image(file.getName()));
+        imgMessageLabel.setText(file.getName());
+        imageName = file.getName();
+        files = Paths.get(file.toURI());
+    }
+
+    @FXML
+    private void dragOverAct(DragEvent dragEvent) {
+        if (dragEvent.getGestureSource() != dragTarget && dragEvent.getDragboard().hasFiles()) {
+            dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            dragTarget.setStyle(
+                    "-fx-padding: 10;" +
+                    "-fx-border-style: solid inside;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-border-insets: 5;" +
+                    "-fx-border-radius: 5;" +
+                    "-fx-border-color: blue;"
+            );
+        }
+        dragEvent.consume();
+        dragTarget.getStyleClass().clear();
+    }
 }

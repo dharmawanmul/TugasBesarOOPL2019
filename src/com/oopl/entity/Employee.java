@@ -1,23 +1,28 @@
 package com.oopl.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 public class Employee {
-    private int idEmployee;
+    private Integer idEmployee;
     private String name;
     private String username;
     private String password;
-    private Role employeeRole;
+    private String photos;
+    private Role roleByRoleIdRole;
 
     @Id
+    @GenericGenerator(strategy = "increment", name = "incrementId")
+    @GeneratedValue(generator = "incrementId")
     @Column(name = "idEmployee", nullable = false)
-    public int getIdEmployee() {
+    public Integer getIdEmployee() {
         return idEmployee;
     }
 
-    public void setIdEmployee(int idEmployee) {
+    public void setIdEmployee(Integer idEmployee) {
         this.idEmployee = idEmployee;
     }
 
@@ -51,29 +56,40 @@ public class Employee {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "photos", nullable = false, length = 100)
+    public String getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String photos) {
+        this.photos = photos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return idEmployee == employee.idEmployee &&
+        return Objects.equals(idEmployee, employee.idEmployee) &&
                 Objects.equals(name, employee.name) &&
                 Objects.equals(username, employee.username) &&
-                Objects.equals(password, employee.password);
+                Objects.equals(password, employee.password) &&
+                Objects.equals(photos, employee.photos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEmployee, name, username, password);
+        return Objects.hash(idEmployee, name, username, password, photos);
     }
 
     @ManyToOne
     @JoinColumn(name = "Role_idRole", referencedColumnName = "idRole", nullable = false)
-    public Role getEmployeeRole() {
-        return employeeRole;
+    public Role getRoleByRoleIdRole() {
+        return roleByRoleIdRole;
     }
 
-    public void setEmployeeRole(Role employeeRole) {
-        this.employeeRole = employeeRole;
+    public void setRoleByRoleIdRole(Role roleByRoleIdRole) {
+        this.roleByRoleIdRole = roleByRoleIdRole;
     }
 }

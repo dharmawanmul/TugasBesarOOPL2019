@@ -29,7 +29,7 @@
             <children>
                 <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../img/parking.png" />
+                        <Image url="@../icon/parking.png" />
                     </image>
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -44,41 +44,20 @@
         </VBox>
         <Pane layoutX="299.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #FFF;">
             <children>
-                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../img/parking.png" />
-                    </image>
-                </ImageView>
-                <Label layoutX="64.0" layoutY="126.0" text="Welcome,">
-                    <font>
-                        <Font name="Impact" size="24.0" />
-                    </font>
-                    <textFill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                            <stops>
-                                <Stop color="#e3d9f1" />
-                                <Stop color="#45cef9" offset="1.0" />
-                            </stops>
-                        </RadialGradient>
-                    </textFill>
-                </Label>
-                <Label layoutX="64.0" layoutY="155.0" text="Sign in to continue" textFill="#a3a3a3">
-                    <font>
-                        <Font name="Ebrima Bold" size="14.0" />
-                    </font>
-                </Label>
-                <JFXButton fx:id="loginBtn" buttonType="RAISED" layoutX="100.0" layoutY="403.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#actionLogin" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Login">
+                <JFXButton fx:id="loginBtn" buttonType="RAISED" layoutX="100.0" layoutY="407.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#actionLogin" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Get Ticket">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </JFXButton>
-                <JFXTextField fx:id="txtNRP" labelFloat="true" layoutX="100.0" layoutY="239.0" prefHeight="33.0" prefWidth="300.0" promptText="NRP" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" />
+                <JFXTextField fx:id="txtNRP" labelFloat="true" layoutX="100.0" layoutY="166.0" prefHeight="33.0" prefWidth="300.0" promptText="NRP" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" />
                 <FontAwesomeIcon fill="#5a547c" iconName="CLOSE" layoutX="468.0" layoutY="33.0" onMouseClicked="#close" size="1.5em" text="">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </FontAwesomeIcon>
-            <JFXTextField fx:id="txtRegNo" labelFloat="true" layoutX="100.0" layoutY="300.0" prefHeight="33.0" prefWidth="300.0" promptText="Registration Number" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" />
+            <JFXTextField fx:id="txtRegNo" labelFloat="true" layoutX="100.0" layoutY="234.0" prefHeight="33.0" prefWidth="300.0" promptText="Registration Number" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" />
+            <Label fx:id="lblCheck" layoutX="100.0" layoutY="376.0" prefWidth="300.0" />
+            <JFXButton layoutX="221.0" layoutY="322.0" onAction="#loadGuestView" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Guest" />
             </children>
         </Pane>
     </children>

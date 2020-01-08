@@ -46,11 +46,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+//      Employee
         Parent root = FXMLLoader.load(getClass().getResource("view/LoginEmployee.fxml"));
+//      User
+//        Parent root = FXMLLoader.load(getClass().getResource("view/LoginUser.fxml"));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-        primaryStage.getIcons().add(new Image("com/oopl/img/parking.png"));
+        primaryStage.getIcons().add(new Image("com/oopl/icon/parking.png"));
         addDragListeners(root);
     }
 

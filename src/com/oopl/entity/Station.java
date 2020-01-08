@@ -8,16 +8,16 @@ import java.util.Objects;
 
 @Entity
 public class Station {
-    private int idStation;
+    private Integer idStation;
     private String stationName;
 
     @Id
     @Column(name = "idStation", nullable = false)
-    public int getIdStation() {
+    public Integer getIdStation() {
         return idStation;
     }
 
-    public void setIdStation(int idStation) {
+    public void setIdStation(Integer idStation) {
         this.idStation = idStation;
     }
 
@@ -36,7 +36,7 @@ public class Station {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Station station = (Station) o;
-        return idStation == station.idStation &&
+        return Objects.equals(idStation, station.idStation) &&
                 Objects.equals(stationName, station.stationName);
     }
 

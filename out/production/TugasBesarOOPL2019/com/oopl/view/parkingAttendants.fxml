@@ -86,6 +86,11 @@
                         <Font name="System Bold" size="40.0" />
                      </font>
                   </Label>
+                  <Label fx:id="lblEmpId" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="40.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </children>

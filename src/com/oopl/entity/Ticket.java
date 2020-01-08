@@ -9,12 +9,10 @@ public class Ticket {
     private String idTicket;
     private Timestamp dateIn;
     private Timestamp dateOut;
-    private double price;
-    private double total;
-    private Voucher ticketVoucher;
-    private Permissions ticketPermission;
-    private StationHasEmployee ticketStation;
-    private UserHasVehicle userVehicle;
+    private Integer status;
+    private Double total;
+    private User userByUserNrp;
+    private StationHasEmployee stationHasEmployee;
 
     @Id
     @Column(name = "idTicket", nullable = false, length = 100)
@@ -47,22 +45,22 @@ public class Ticket {
     }
 
     @Basic
-    @Column(name = "price", nullable = false, precision = 0)
-    public double getPrice() {
-        return price;
+    @Column(name = "status", nullable = false)
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Basic
     @Column(name = "total", nullable = false, precision = 0)
-    public double getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
@@ -71,55 +69,35 @@ public class Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return Double.compare(ticket.price, price) == 0 &&
-                Double.compare(ticket.total, total) == 0 &&
-                Objects.equals(idTicket, ticket.idTicket) &&
+        return Objects.equals(idTicket, ticket.idTicket) &&
                 Objects.equals(dateIn, ticket.dateIn) &&
-                Objects.equals(dateOut, ticket.dateOut);
+                Objects.equals(dateOut, ticket.dateOut) &&
+                Objects.equals(status, ticket.status) &&
+                Objects.equals(total, ticket.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTicket, dateIn, dateOut, price, total);
+        return Objects.hash(idTicket, dateIn, dateOut, status, total);
     }
 
     @ManyToOne
-    @JoinColumn(name = "Voucher_idVoucher", referencedColumnName = "idVoucher", nullable = false)
-    public Voucher getTicketVoucher() {
-        return ticketVoucher;
+    @JoinColumn(name = "User_NRP", referencedColumnName = "NRP", nullable = false)
+    public User getUserByUserNrp() {
+        return userByUserNrp;
     }
 
-    public void setTicketVoucher(Voucher ticketVoucher) {
-        this.ticketVoucher = ticketVoucher;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "Permissions_idPermissions", referencedColumnName = "idPermissions", nullable = false)
-    public Permissions getTicketPermission() {
-        return ticketPermission;
-    }
-
-    public void setTicketPermission(Permissions ticketPermission) {
-        this.ticketPermission = ticketPermission;
+    public void setUserByUserNrp(User userByUserNrp) {
+        this.userByUserNrp = userByUserNrp;
     }
 
     @ManyToOne
     @JoinColumns({@JoinColumn(name = "Station_has_Employee_Station_idStation", referencedColumnName = "Station_idStation", nullable = false), @JoinColumn(name = "Station_has_Employee_Employee_idEmployee", referencedColumnName = "Employee_idEmployee", nullable = false)})
-    public StationHasEmployee getTicketStation() {
-        return ticketStation;
+    public StationHasEmployee getStationHasEmployee() {
+        return stationHasEmployee;
     }
 
-    public void setTicketStation(StationHasEmployee ticketStation) {
-        this.ticketStation = ticketStation;
-    }
-
-    @ManyToOne
-    @JoinColumns({@JoinColumn(name = "User_has_Vehicle_User_NRP", referencedColumnName = "User_NRP", nullable = false), @JoinColumn(name = "User_has_Vehicle_Vehicle_registrationNum", referencedColumnName = "Vehicle_registrationNum", nullable = false)})
-    public UserHasVehicle getUserVehicle() {
-        return userVehicle;
-    }
-
-    public void setUserVehicle(UserHasVehicle userVehicle) {
-        this.userVehicle = userVehicle;
+    public void setStationHasEmployee(StationHasEmployee stationHasEmployee) {
+        this.stationHasEmployee = stationHasEmployee;
     }
 }

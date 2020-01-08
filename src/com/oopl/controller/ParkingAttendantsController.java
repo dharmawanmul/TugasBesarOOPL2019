@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ParkingAttendantsController {
+public class ParkingAttendantsController implements Initializable {
     @FXML
     private JFXTextField txtNRP;
     @FXML
@@ -22,10 +22,27 @@ public class ParkingAttendantsController {
     private JFXTextField txtPermission;
     @FXML
     private JFXTextArea txtPrice;
-    private Employee empWorking;
     @FXML
     private ImageView imgEmp;
     @FXML
     private Label lblEmpName;
+    private Employee loginEmployee;
+    @FXML
+    private Label lblEmpId;
+    private LoginEmployeeController controller;
+
+    public void setController(LoginEmployeeController controller) {
+        this.controller = controller;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+    public void setLoginEmployee(Employee employee) {
+        this.loginEmployee = employee;
+    }
+
 
 }

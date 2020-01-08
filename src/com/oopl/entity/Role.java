@@ -8,16 +8,16 @@ import java.util.Objects;
 
 @Entity
 public class Role {
-    private int idRole;
+    private Integer idRole;
     private String role;
 
     @Id
     @Column(name = "idRole", nullable = false)
-    public int getIdRole() {
+    public Integer getIdRole() {
         return idRole;
     }
 
-    public void setIdRole(int idRole) {
+    public void setIdRole(Integer idRole) {
         this.idRole = idRole;
     }
 
@@ -36,12 +36,17 @@ public class Role {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role1 = (Role) o;
-        return idRole == role1.idRole &&
+        return Objects.equals(idRole, role1.idRole) &&
                 Objects.equals(role, role1.role);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idRole, role);
+    }
+
+    @Override
+    public String toString() {
+        return this.role;
     }
 }

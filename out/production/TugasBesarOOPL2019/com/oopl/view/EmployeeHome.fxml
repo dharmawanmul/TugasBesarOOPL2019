@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopl.controller.EmployeeHomeController">
+   <children>
+      <LineChart fx:id="lineChart" horizontalGridLinesVisible="false" layoutX="140.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="720.0">
+         <xAxis>
+            <CategoryAxis fx:id="C" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis fx:id="N" side="LEFT" upperBound="275.0" />
+         </yAxis>
+      </LineChart>
+   </children>
+</Pane>

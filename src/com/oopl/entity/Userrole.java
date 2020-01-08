@@ -8,16 +8,16 @@ import java.util.Objects;
 
 @Entity
 public class Userrole {
-    private int idUserRole;
+    private Integer idUserRole;
     private String userRole;
 
     @Id
     @Column(name = "idUserRole", nullable = false)
-    public int getIdUserRole() {
+    public Integer getIdUserRole() {
         return idUserRole;
     }
 
-    public void setIdUserRole(int idUserRole) {
+    public void setIdUserRole(Integer idUserRole) {
         this.idUserRole = idUserRole;
     }
 
@@ -36,7 +36,7 @@ public class Userrole {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Userrole userrole = (Userrole) o;
-        return idUserRole == userrole.idUserRole &&
+        return Objects.equals(idUserRole, userrole.idUserRole) &&
                 Objects.equals(userRole, userrole.userRole);
     }
 

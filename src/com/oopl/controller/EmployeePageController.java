@@ -2,11 +2,8 @@ package com.oopl.controller;
 
 import com.oopl.Main;
 import com.oopl.dao.EmployeeDaoImpl;
-import com.oopl.dao.RoleDaoImpl;
 import com.oopl.entity.Employee;
-import com.oopl.entity.Role;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,8 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -32,13 +27,9 @@ import java.util.ResourceBundle;
 public class EmployeePageController implements Initializable {
     @FXML
     private Pane contentArea;
-    @FXML
-    private Label labelName;
-    private ObservableList<Role> roles;
 //    private ObservableList<Vehicletype> vehicles;
     private ObservableList<Employee> employees;
-    private RoleDaoImpl roleDao;
-//    private VehicletypeDaoImpl vehicleDao;
+//    private VehicleTypeDaoImpl vehicleDao;
     private EmployeeDaoImpl employeeDao;
     @FXML
     private LineChart<?, ?> lineChart;
@@ -46,21 +37,8 @@ public class EmployeePageController implements Initializable {
     private CategoryAxis C;
     @FXML
     private NumberAxis N;
-
-    public ObservableList<Role> getRole() {
-        if (roles == null) {
-            roles = FXCollections.observableArrayList();
-            roles.addAll(getRoleDao().showAll());
-        }
-        return roles;
-    }
-
-    public RoleDaoImpl getRoleDao() {
-        if (roleDao == null) {
-            roleDao = new RoleDaoImpl();
-        }
-        return roleDao;
-    }
+    @FXML
+    private Pane sideMenu;
 
 //    public ObservableList<Vehicletype> getVehicles() {
 //        if (vehicles == null) {
@@ -70,33 +48,24 @@ public class EmployeePageController implements Initializable {
 //        return vehicles;
 //    }
 //
-//    public VehicletypeDaoImpl getVehicleDao() {
+//    public VehicleTypeDaoImpl getVehicleDao() {
 //        if (vehicleDao == null) {
-//            vehicleDao = new VehicletypeDaoImpl();
+//            vehicleDao = new VehicleTypeDaoImpl();
 //        }
 //        return vehicleDao;
 //    }
 
-    public ObservableList<Employee> getEmployees() {
-        if (employees == null) {
-            employees = FXCollections.observableArrayList();
-            employees.addAll(getEmployeeDao().showAll());
-        }
-        return employees;
-    }
-
-    public EmployeeDaoImpl getEmployeeDao() {
-        if (employeeDao == null) {
-            employeeDao = new EmployeeDaoImpl();
-        }
-        return employeeDao;
-    }
-
     @FXML
     private void openHome(ActionEvent actionEvent) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("../view/overviewPage.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("view/EmployeeHome.fxml"));
+        Parent node = loader.load();
+//        EmployeeManagementController pageController = loader.getController();
+//        pageController.setMainFormController(this);
+//        node.setUserData(fxmlLocation);
         contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
+        contentArea.getChildren().setAll(node);
+//        node.requestFocus();
     }
 
     @FXML
@@ -104,9 +73,6 @@ public class EmployeePageController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/EmployeeManagement.fxml"));
         Parent node = loader.load();
-        EmployeeManagementController pageController = loader.getController();
-        pageController.setMainFormController(this);
-//        node.setUserData(fxmlLocation);
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(node);
 //        node.requestFocus();
@@ -133,7 +99,7 @@ public class EmployeePageController implements Initializable {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-        primaryStage.getIcons().add(new Image("com/oopl/img/parking.png"));
+        primaryStage.getIcons().add(new Image("com/oopl/icon/parking.png"));
     }
 
     @FXML
@@ -143,17 +109,18 @@ public class EmployeePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        XYChart.Series S = new XYChart.Series<>();
-        S.setName("Chart 1");
+        try {
+            onStartContent();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        S.getData().add(new XYChart.Data<>("1", 300));
-        S.getData().add(new XYChart.Data<>("2", 125));
-        S.getData().add(new XYChart.Data<>("3", 293));
-        S.getData().add(new XYChart.Data<>("4", 128));
-        S.getData().add(new XYChart.Data<>("5", 223));
-        S.getData().add(new XYChart.Data<>("6", 111));
-        S.getData().add(new XYChart.Data<>("7", 194));
-
-        lineChart.getData().setAll(S);
+    private void onStartContent() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("view/EmployeeHome.fxml"));
+        Parent node = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(node);
     }
 }

@@ -20,8 +20,8 @@
     -fx-border-radius: 3px;
 }
 
-.forgetBtn {
-    -fx-text-fill: #a3a3a3;
+.btn {
+    -fx-text-fill: #746E98;
 }
 
 .forgetBtn:hover {
@@ -89,8 +89,8 @@
     -fx-background-color: transparent;
     -fx-border-width: 0px 0px 3px 0px;
     -fx-border-style: solid;
-    -fx-border-color: #ff6666;
-    -fx-text-fill: #AFDDE4;
+    /*-fx-border-color: #ff6666;*/
+    /*-fx-text-fill: #AFDDE4;*/
     -fx-underline: true;
 }
 
