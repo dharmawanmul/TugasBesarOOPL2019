@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -114,6 +115,7 @@ public class LoginEmployeeController {
         stage.setScene(new Scene(root));
         stage.getIcons().add(new Image("com/oopl/icon/parking.png"));
         stage.initModality(Modality.WINDOW_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 }
