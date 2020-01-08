@@ -8,7 +8,7 @@ Tugas Besar Pemrograman Berorientasi Objek 2 B
 ### Components
 This part will be reviewed and updated as the project progress increases.
 
-The code at LoginEmployee.java which contains the login method
+The code at LoginEmployeeController.java which contains the login method
 ```java
     public void login() throws IOException {
         Employee e = new Employee();
@@ -29,7 +29,7 @@ The code at LoginEmployee.java which contains the login method
     }
 ```
 
-The code at LoginEmployee.java that passes an object to another controller
+The code at LoginEmployeeController.java that passes an object to another controller
 ```java
     public void loadParkingAttendantsStage(Employee temp) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -103,4 +103,4 @@ This project is powered by :
 </a>
 
 ### Thanks
-Big thanks to Nicolavickh Yohanes
+Big thanks to Nicolavickh Yohanes for the continous meetings, ideas and corrections in the code itself which leads into inequality at number of commits that makes it incommensurable.
