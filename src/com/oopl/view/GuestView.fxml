@@ -53,8 +53,8 @@
                 <Label fx:id="lblCheck" layoutX="100.0" layoutY="376.0" prefWidth="300.0" />
             <HBox alignment="CENTER" layoutX="100.0" layoutY="322.0" prefWidth="300.0" spacing="50.0">
                <children>
-                      <JFXButton layoutX="221.0" layoutY="322.0" onAction="#addGuestMobil" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Mobil" />
-                  <JFXButton layoutX="305.0" layoutY="322.0" onAction="#addGuestMotor" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Motor" />
+                      <JFXButton fx:id="btnMbl" layoutX="221.0" layoutY="322.0" onAction="#addGuestMobil" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Mobil" />
+                  <JFXButton fx:id="btnMtr" layoutX="305.0" layoutY="322.0" onAction="#addGuestMotor" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Motor" />
                </children>
             </HBox>
             </children>

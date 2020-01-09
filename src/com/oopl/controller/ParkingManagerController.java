@@ -31,6 +31,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParkingManagerController implements Initializable {
+    private LoginEmployeeController controller;
     @FXML
     private JFXTextField txtRegNo;
     @FXML
@@ -144,8 +145,12 @@ public class ParkingManagerController implements Initializable {
 //              "^[a-zA-Z]{1,2}\\s[\\d]{1,4}\\s[a-zA-Z]{1,3}$" //regex
                 Matcher m = Pattern.compile("^[a-zA-Z]{1,2}\\s[\\d]{1,4}\\s[a-zA-Z]{1,4}$").matcher(txtRegNo.getText());
                 if (m.find()) {
+                    lblRegNo.setText("");
+                    lblRegNo.getStyleClass().clear();
                     saveBtn.setDisable(false);
                 } else {
+                    lblRegNo.setText("Invalid license plate number");
+                    lblRegNo.setStyle("-fx-text-fill: red");
                     saveBtn.setDisable(true);
                 }
             }
@@ -164,10 +169,12 @@ public class ParkingManagerController implements Initializable {
                 }
                 Matcher m = Pattern.compile("^[a-zA-Z]{1,2}\\s[\\d]{1,4}\\s[a-zA-Z]{1,4}$").matcher(txtRegNo2.getText());
                 if (m.find()) {
-//                    System.out.println("Valid license plate number");
+                    lblRegNo2.setText("");
+                    lblRegNo2.getStyleClass().clear();
                     saveBtn.setDisable(false);
                 } else {
-//                    System.out.println("Invalid");
+                    lblRegNo2.setText("Invalid license plate number");
+                    lblRegNo2.setStyle("-fx-text-fill: red");
                     saveBtn.setDisable(true);
                 }
             }
@@ -209,6 +216,8 @@ public class ParkingManagerController implements Initializable {
         int result = dao.updateData(user);
         System.out.println(result);
         resetForm();
+        dataList.clear();
+        dataList.addAll(getUsersVehicles());
     }
 
     @FXML
@@ -221,5 +230,9 @@ public class ParkingManagerController implements Initializable {
         txtRegNo.clear();
         txtName.clear();
         tableUser.refresh();
+        lblRegNo.getStyleClass().clear();
+        lblRegNo.setText("");
+        lblRegNo2.getStyleClass().clear();
+        lblRegNo2.setText("");
     }
 }

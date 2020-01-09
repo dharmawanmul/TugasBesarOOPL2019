@@ -1,12 +1,13 @@
 package com.oopl.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "station_has_employee", schema = "dboopl", catalog = "")
-public class StationHasEmployee {
+public class StationHasEmployee implements Serializable {
     private Timestamp empDateIn;
     private Timestamp empDateOut;
     private Station stationByStationIdStation;
@@ -46,6 +47,7 @@ public class StationHasEmployee {
         return Objects.hash(empDateIn, empDateOut);
     }
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "Station_idStation", referencedColumnName = "idStation", nullable = false)
     public Station getStationByStationIdStation() {
@@ -56,6 +58,7 @@ public class StationHasEmployee {
         this.stationByStationIdStation = stationByStationIdStation;
     }
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "Employee_idEmployee", referencedColumnName = "idEmployee", nullable = false)
     public Employee getEmployeeByEmployeeIdEmployee() {

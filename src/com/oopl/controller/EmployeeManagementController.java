@@ -35,6 +35,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.*;
 import java.util.ResourceBundle;
@@ -133,7 +134,6 @@ public class EmployeeManagementController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png","*.jpg")
@@ -171,9 +171,11 @@ public class EmployeeManagementController implements Initializable {
                 if (!txtPass.getText().equals(txtRePass.getText())) {
                     lblRePass.setStyle("-fx-text-fill: red");
                     lblRePass.setText("Password Didn't Match");
+                    saveBtn.setDisable(true);
                 } else {
-                    lblRePass.getStyleClass().clear();
-                    lblRePass.setText("");
+                    lblRePass.setStyle("-fx-text-fill: green");
+                    lblRePass.setText("Password match");
+                    saveBtn.setDisable(false);
                 }
             }
         });
@@ -243,9 +245,12 @@ public class EmployeeManagementController implements Initializable {
                         StandardCopyOption.REPLACE_EXISTING,
                         StandardCopyOption.COPY_ATTRIBUTES
                 };
+                tableEmployee.refresh();
                 clearForm();
                 refreshTable();
                 Files.copy(files, copy, options);
+                dataList.clear();
+                dataList.addAll(getEmployees());
             } catch (IOException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -260,6 +265,8 @@ public class EmployeeManagementController implements Initializable {
         if (txtPass.getText().equals(txtRePass.getText())) {
             selectedItems.setRoleByRoleIdRole(cmbxRole.getSelectionModel().getSelectedItem());
             getEmployeeDao().updateData(selectedItems);
+            dataList.clear();
+            dataList.addAll(getEmployees());
             clearForm();
             refreshTable();
         } else {
@@ -281,6 +288,8 @@ public class EmployeeManagementController implements Initializable {
             if (deleteConfirmation.getResult() == ButtonType.OK) {
                 selectedItems = tableEmployee.getSelectionModel().getSelectedItem();
                 getEmployeeDao().deleteData(selectedItems);
+                dataList.clear();
+                dataList.addAll(getEmployees());
                 refreshTable();
                 clearForm();
             }
@@ -296,27 +305,11 @@ public class EmployeeManagementController implements Initializable {
                 BufferedImage bufferedImage = ImageIO.read(file);
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                 imgChecker.setPreserveRatio(true);
-                imgChecker.setImage(new Image(file.getName()));
-                imgMessageLabel.setText("Files added");
-//                Stage stage = new Stage();
-//                stage.initOwner(stage);
-//                stage.initStyle(StageStyle.UNDECORATED);
-//                ImageView preview = new ImageView();
-//                preview.setFitHeight(300);
-//                preview.setFitWidth(250);
-//                preview.setImage(image);
-//
-//                StackPane stackPane = new StackPane();
-//                stackPane.setPrefSize(250, 500);
-//                stackPane.getChildren().addAll(preview);
-//                stage.setScene(new Scene(stackPane));
-//                imgChecker.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
-//                    if (newValue) {
-//                        stage.show();
-//                    } else {
-//                        stage.hide();
-//                    }
-//                });
+                imgChecker.setFitWidth(150);
+                imgChecker.setFitHeight(200);
+                imgChecker.setImage(image);
+                imgMessageLabel.setText(file.getName());
+
                 imageName = file.getName();
                 files = Paths.get(file.toURI());
             } catch (IOException ex) {
@@ -344,6 +337,10 @@ public class EmployeeManagementController implements Initializable {
         imgMessageLabel.setText("");
         clearForm();
         refreshTable();
+        saveBtn.setDisable(false);
+        updateBtn.setDisable(true);
+        dataList.clear();
+        dataList.addAll(getEmployees());
     }
 
     private void clearForm() {
@@ -367,26 +364,54 @@ public class EmployeeManagementController implements Initializable {
     private void refreshTable() {
         getEmployees().clear();
         getEmployees().addAll(getEmployeeDao().showAll());
+//        tableEmployee.refresh();
     }
 
     @FXML
-    private void droppedAct(DragEvent dragEvent) {
+    private void droppedAct(DragEvent dragEvent) throws IOException {
         Dragboard db = dragEvent.getDragboard();
         if (db.hasFiles()) {
-            File file = db.getFiles().get(0);
+            db.getFiles().forEach(file -> {
+                try {
+                    Image image = new Image(file.toURI().toURL().toExternalForm());
+                    imgChecker.setFitWidth(150);
+                    imgChecker.setFitHeight(200);
+                    imgChecker.setImage(image);
+                    imgMessageLabel.setText(file.getName());
+                    imageName = file.getName();
+                    files = Paths.get(file.toURI());
+                } catch (Exception exc) {
+                    System.out.println("Could not load image " + file);
+                }
+            });
+            dragEvent.setDropCompleted(true);
         }
-        dragEvent.consume();
-        imgChecker.setPreserveRatio(true);
-        imgChecker.setImage(new Image(file.getName()));
-        imgMessageLabel.setText(file.getName());
-        imageName = file.getName();
-        files = Paths.get(file.toURI());
+        dragTarget.getStyleClass().clear();
+//        Image path;
+//        if (db.hasImage() || db.hasFiles()) {
+//            File file = new File(db.getUrl());
+//            BufferedImage bufferedImage = ImageIO.read(file);
+//            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+//            path = db.getImage();
+//            imgChecker.setPreserveRatio(true);
+//            imgChecker.setImage(path);
+//            imgMessageLabel.setText(file.getName());
+//            imageName = file.getName();
+//            files = Paths.get(file.toURI());
+//            System.out.println(files);
+//            System.out.println(imageName);
+//            System.out.println(files.getFileName());
+//            System.out.println(files.getName(0));
+//            System.out.println(files.getFileSystem());
+//            dragEvent.setDropCompleted(true);
+//        }
     }
 
     @FXML
     private void dragOverAct(DragEvent dragEvent) {
-        if (dragEvent.getGestureSource() != dragTarget && dragEvent.getDragboard().hasFiles()) {
-            dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+        Dragboard db = dragEvent.getDragboard();
+        if (db.hasFiles() || db.hasImage()) {
+            dragEvent.acceptTransferModes(TransferMode.COPY);
             dragTarget.setStyle(
                     "-fx-padding: 10;" +
                     "-fx-border-style: solid inside;" +
@@ -396,7 +421,6 @@ public class EmployeeManagementController implements Initializable {
                     "-fx-border-color: blue;"
             );
         }
-        dragEvent.consume();
         dragTarget.getStyleClass().clear();
     }
 }

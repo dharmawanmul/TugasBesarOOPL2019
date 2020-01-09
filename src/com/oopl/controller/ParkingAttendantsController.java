@@ -43,6 +43,4 @@ public class ParkingAttendantsController implements Initializable {
     public void setLoginEmployee(Employee employee) {
         this.loginEmployee = employee;
     }
-
-
 }

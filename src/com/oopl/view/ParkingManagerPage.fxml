@@ -24,19 +24,19 @@
         </rowConstraints>
          <children>
             <Label fx:id="lblName" text="Nama" />
-            <Label fx:id="lblMotorcycle" text="Plat Nomor Mobil" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
-            <Label fx:id="lblCar" text="Plat Nomor Motor" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
+            <Label fx:id="lblMotorcycle" text="Car's License Plate" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+            <Label fx:id="lblCar" text="Bike's License Plate" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
             <JFXTextField fx:id="txtName" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="400.0" promptText="Full Name" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" GridPane.columnIndex="1" />
             <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <JFXTextField fx:id="txtRegNo" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="400.0" promptText="License Plate Number" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="lblRegNo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lblRegNo" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <JFXTextField fx:id="txtRegNo2" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="400.0" promptText="License Plate Number" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="lblRegNo2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="lblRegNo2" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </HBox>
          </children>

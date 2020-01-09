@@ -63,7 +63,7 @@ public class Employee {
     }
 
     public void setPhotos(String photos) {
-        this.photos = photos;
+        this.photos = "../images/"+photos;
     }
 
     @Override

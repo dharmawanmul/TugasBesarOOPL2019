@@ -56,8 +56,9 @@
                     </font>
                 </FontAwesomeIcon>
             <JFXTextField fx:id="txtRegNo" labelFloat="true" layoutX="100.0" layoutY="234.0" prefHeight="33.0" prefWidth="300.0" promptText="Registration Number" stylesheets="@../css/stylesheet.css" unFocusColor="#746e98" />
-            <Label fx:id="lblCheck" layoutX="100.0" layoutY="376.0" prefWidth="300.0" />
-            <JFXButton layoutX="221.0" layoutY="322.0" onAction="#loadGuestView" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Guest" />
+            <Label fx:id="lblCheckReg" layoutX="100.0" layoutY="376.0" prefWidth="300.0" />
+            <JFXButton layoutX="221.0" layoutY="308.0" onAction="#loadGuestView" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Guest" />
+            <Label fx:id="lblCheck" layoutX="100.0" layoutY="353.0" prefWidth="300.0" />
             </children>
         </Pane>
     </children>

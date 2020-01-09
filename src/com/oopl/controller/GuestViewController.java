@@ -1,11 +1,13 @@
 package com.oopl.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.oopl.dao.UserDaoImpl;
 import com.oopl.entity.User;
 import com.oopl.entity.Userrole;
 import com.oopl.entity.Vehicle;
 import com.oopl.entity.Vehicletype;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -26,7 +28,13 @@ public class GuestViewController implements Initializable {
     private Label lblCheck;
     private final UserDaoImpl userDao = new UserDaoImpl();
     @FXML
+    private JFXButton btnMbl;
+    @FXML
+    private JFXButton btnMtr;
+
+    @FXML
     private void close(MouseEvent mouseEvent) {
+        Platform.exit();
     }
 
     @FXML
@@ -82,9 +90,13 @@ public class GuestViewController implements Initializable {
                 if (m.find()) {
                     lblCheck.setText("Proceed");
                     lblCheck.setStyle("-fx-text-fill: green");
+                    btnMbl.setDisable(false);
+                    btnMtr.setDisable(false);
                 } else {
                     lblCheck.setText("Invalid license plate number");
                     lblCheck.setStyle("-fx-text-fill: red");
+                    btnMbl.setDisable(true);
+                    btnMtr.setDisable(true);
                 }
             }
         });

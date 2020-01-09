@@ -35,6 +35,8 @@ public class LoginUserController implements Initializable {
     private JFXTextField txtRegNo;
     @FXML
     private Label lblCheck;
+    @FXML
+    private Label lblCheckReg;
 
 
     @FXML
@@ -79,7 +81,23 @@ public class LoginUserController implements Initializable {
                 }
             }
         });
+        txtRegNo.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                Matcher m = Pattern.compile("^[a-zA-Z]{1,2}\\s[\\d]{1,4}\\s[a-zA-Z]{1,4}$").matcher(txtRegNo.getText());
+                if (m.find()) {
+                    lblCheckReg.setText("Valid license plate number");
+                    lblCheckReg.setStyle("-fx-text-fill: green");
+                    loginBtn.setDisable(false);
+                } else {
+                    lblCheckReg.setText("Invalid license plate number");
+                    lblCheckReg.setStyle("-fx-text-fill: red");
+                    loginBtn.setDisable(true);
+                }
+            }
+        });
     }
+
 
     @FXML
     private void loadGuestView(ActionEvent actionEvent) throws IOException {
