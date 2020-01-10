@@ -88,6 +88,58 @@ public class TicketDaoImpl implements DaoService<Ticket> {
         return result;
     }
 
+    public int getVehicleNum(String monthYear, int vehicle) {
+        int Num = 0;
+        try {
+            Connection connection = DBHelper.createMySQLConnection();
+            String query = "SELECT COUNT(t.idTicket) FROM Ticket t JOIN Vehicle v ON t.Vehicle_registrationNum = v.registrationNum WHERE SUBSTRING(t.idTicket,1,4) = ? AND v.VehicleType_idType=?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, monthYear);
+            ps.setInt(2, vehicle);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Num = Integer.parseInt(rs.getString("COUNT(t.idTicket)"));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return Num;
+    }
+
+    public int getProfit(String monthYear, int vehicle) {
+        int Num = 0;
+        try {
+            Connection connection = DBHelper.createMySQLConnection();
+            String query = "SELECT SUM(t.total) FROM Ticket t JOIN Vehicle v ON t.Vehicle_registrationNum = v.registrationNum WHERE SUBSTRING(t.idTicket,1,4) = ? AND v.VehicleType_idType=?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, monthYear);
+            ps.setInt(2, vehicle);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Num = rs.getInt("SUM(t.total)");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return Num;
+    }
+
+    public List<String> getAllYear(){
+        List<String> years = new ArrayList<>();
+        try {
+            Connection connection = DBHelper.createMySQLConnection();
+            String query = "SELECT DISTINCT YEAR(date_out) FROM Ticket";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                years.add(rs.getString("YEAR(date_out)"));
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return years;
+    }
+
 //    public Ticket getTicketByNRPAndRegisNum(String NRP, String plateNum) {
 //        Ticket ticket = new Ticket();
 //        try {

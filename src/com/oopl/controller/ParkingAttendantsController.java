@@ -71,11 +71,9 @@ public class ParkingAttendantsController implements Initializable {
                 if (m.find()) {
                     lblDisplay.setText("");
                     lblDisplay.getStyleClass().clear();
-                    printBtn.setDisable(true);
                 } else {
                     lblDisplay.setText("Invalid NRP");
                     lblDisplay.setStyle("-fx-text-fill: red");
-                    printBtn.setDisable(false);
                 }
             }
         });
@@ -178,6 +176,7 @@ public class ParkingAttendantsController implements Initializable {
         txtTicket.clear();
         txtVoucher.clear();
         txtPermission.setDisable(false);
+        printBtn.setDisable(false);
     }
 
     @FXML
