@@ -56,9 +56,4 @@ public class Vehicletype {
     public int hashCode() {
         return Objects.hash(idType, vehicleType, rate);
     }
-
-    @Override
-    public String toString() {
-        return vehicleType;
-    }
 }

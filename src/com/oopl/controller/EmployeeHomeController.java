@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class EmployeeHomeController implements Initializable {
@@ -30,9 +31,7 @@ public class EmployeeHomeController implements Initializable {
     @FXML
     private Label chartTitle;
     private String[] vehicleData = new String[3];
-    XYChart.Series<String, Integer> series = new XYChart.Series<>();
-    XYChart.Series<String, Integer> series2 = new XYChart.Series<>();
-
+    private String[] days = new String[7];
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //        LineChart lineChart = new LineChart(
@@ -46,12 +45,32 @@ public class EmployeeHomeController implements Initializable {
 //                        )
 //                )
 //        );
-        generateChart();
-        lineChart.setCursor(Cursor.CROSSHAIR);
+//        generateChart();
+//        lineChart.setCursor(Cursor.CROSSHAIR);
+//
+//        lineChart.setTitle("Stock Monitoring, 2013");
 
-        lineChart.setTitle("Stock Monitoring, 2013");
+        XYChart.Series series = new XYChart.Series<>();
+        XYChart.Series series2 = new XYChart.Series<>();
 
-//        XYChart.Series S = new XYChart.Series<>();
+        series.getData().add(new XYChart.Data<String, Integer>("Monday", 125));
+        series.getData().add(new XYChart.Data<String, Integer>("Tuesday", 220));
+        series.getData().add(new XYChart.Data<String, Integer>("Wednesday", 240));
+        series.getData().add(new XYChart.Data<String, Integer>("Thursday", 205));
+        series.getData().add(new XYChart.Data<String, Integer>("Friday", 320));
+        series.getData().add(new XYChart.Data<String, Integer>("Saturday", 220));
+        series.getData().add(new XYChart.Data<String, Integer>("Sunday", 120));
+        series.setNode(new HoveredThresholdNode(15,15));
+
+        series2.getData().add(new XYChart.Data<String, Integer>("Monday", 432));
+        series2.getData().add(new XYChart.Data<String, Integer>("Tuesday", 132));
+        series2.getData().add(new XYChart.Data<String, Integer>("Wednesday", 441));
+        series2.getData().add(new XYChart.Data<String, Integer>("Thursday", 426));
+        series2.getData().add(new XYChart.Data<String, Integer>("Friday", 622));
+        series2.getData().add(new XYChart.Data<String, Integer>("Saturday", 674));
+        series2.getData().add(new XYChart.Data<String, Integer>("Sunday", 734));
+        series2.setNode(new HoveredThresholdNode(15,15));
+
 //        S.setName("Chart 1");
 //
 //        S.getData().add(new XYChart.Data<>("1", 300));
@@ -62,29 +81,20 @@ public class EmployeeHomeController implements Initializable {
 //        S.getData().add(new XYChart.Data<>("6", 111));
 //        S.getData().add(new XYChart.Data<>("7", 194));
 //
-//        lineChart.getData().setAll(S);
+        lineChart.getData().setAll(series);
+        lineChart.getData().setAll(series2);
     }
-//        series.getData().add(new XYChart.Data<String, Integer>("Monday", 125));
-//        series.getData().add(new XYChart.Data<String, Integer>("Tuesday", 220));
-//        series.getData().add(new XYChart.Data<String, Integer>("Wednesday", 240));
-//        series.getData().add(new XYChart.Data<String, Integer>("Thursday", 205));
-//        series.getData().add(new XYChart.Data<String, Integer>("Friday", 320));
-//        series.getData().add(new XYChart.Data<String, Integer>("Saturday", 220));
-//        series.getData().add(new XYChart.Data<String, Integer>("Sunday", 120));
-//
-//        series2.getData().add(new XYChart.Data<String, Integer>("Monday", 432));
-//        series2.getData().add(new XYChart.Data<String, Integer>("Tuesday", 132));
-//        series2.getData().add(new XYChart.Data<String, Integer>("Wednesday", 441));
-//        series2.getData().add(new XYChart.Data<String, Integer>("Thursday", 426));
-//        series2.getData().add(new XYChart.Data<String, Integer>("Friday", 622));
-//        series2.getData().add(new XYChart.Data<String, Integer>("Saturday", 674));
-//        series2.getData().add(new XYChart.Data<String, Integer>("Sunday", 734));
 
-    private void addVehiclesData() {
-        vehicleData[0] = "Cars";
-        vehicleData[1] = "Bike";
-        vehicleData[2] = "Both";
-    }
+
+//    private void addDays() {
+//        days[0] = "Monday";
+//        days[1] = "Tuesday";
+//        days[2] = "Wednesday";
+//        days[3] = "Thursday";
+//        days[4] = "Friday";
+//        days[5] = "Saturday";
+//        days[6] = "Sunday";
+//    }
 
 //    private void addDateData() {
 //        int min = 1;
@@ -94,23 +104,29 @@ public class EmployeeHomeController implements Initializable {
 //        }
 //    }
 
-    public void generateChart() {
-        int x = 1;
-        int y = 20;
-        addVehiclesData();
-        for (int i = 0; i < 1 ; i++) {
-            XYChart.Series series = new XYChart.Series();
-            series.setName(vehicleData[0]);
-            for (int j = 0; j < 13; j++) {
-                final XYChart.Data<String, Integer> data = new XYChart.Data<>(String.valueOf(x), 100);
-                data.setNode(new HoveredThresholdNode(5, y));
-                series.getData().add(data);
-                y+=20;
-                x+=1;
-            }
-            lineChart.getData().add(series);
-        }
-    }
+//    public void generateChart() {
+//        int x = 1;
+//        int y = 20;
+//            XYChart.Series series = new XYChart.Series();
+//            XYChart.Series series2 = new XYChart.Series();
+//            XYChart.Series series3 = new XYChart.Series();
+//            series.setName("Cars");
+//            series2.setName("Motorcycles");
+//            series3.setName("Both");
+//            for (int j = 0; j < 13; j++) {
+//                final XYChart.Data<String, Integer> data = new XYChart.Data<String, Integer>(String.valueOf(days), 20); //yValue replace
+//                final XYChart.Data<String, Integer> data2 = new XYChart.Data<String, Integer>(String.valueOf(days), 30);
+//                final XYChart.Data<String, Integer> data3 = new XYChart.Data<>(String.valueOf(x), 50);
+//                data.setNode(new HoveredThresholdNode(x, y));
+//                data2.setNode(new HoveredThresholdNode(x, y));
+//                y+=12;
+//                x+=1;
+//                series.getData().add(data);
+//                series2.getData().add(data2);
+//            }
+//        lineChart.getData().add(series);
+//        lineChart.getData().add(series2);
+//    }
 
 //    public ObservableList<XYChart.Data<Integer, Integer>> plot(int... y) {
 //        final ObservableList<XYChart.Data<Integer, Integer>> dataset = FXCollections.observableArrayList();
@@ -165,7 +181,6 @@ public class EmployeeHomeController implements Initializable {
         } else {
             label.setTextFill(Color.FIREBRICK);
         }
-
         label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
         return label;
     }

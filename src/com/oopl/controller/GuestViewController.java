@@ -2,11 +2,10 @@ package com.oopl.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.oopl.dao.TicketDaoImpl;
 import com.oopl.dao.UserDaoImpl;
-import com.oopl.entity.User;
-import com.oopl.entity.Userrole;
-import com.oopl.entity.Vehicle;
-import com.oopl.entity.Vehicletype;
+import com.oopl.dao.VehicleDaoImpl;
+import com.oopl.entity.*;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -15,8 +14,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,6 +30,7 @@ public class GuestViewController implements Initializable {
     @FXML
     private Label lblCheck;
     private final UserDaoImpl userDao = new UserDaoImpl();
+    private final VehicleDaoImpl vehicleDao = new VehicleDaoImpl();
     @FXML
     private JFXButton btnMbl;
     @FXML
@@ -53,10 +57,35 @@ public class GuestViewController implements Initializable {
 
         user.setVehicleByVehicleRegistrationNum(vehicle);
         user.setUserroleByUserRoleIdUserRole(userrole);
+
         user.setNrp("GUEST" + String.valueOf(userDao.getGuest()));
+
         user.setUserName("");
 
+        vehicleDao.addData(vehicle);
         userDao.addData(user);
+
+        Ticket ticket = new Ticket();
+        TicketDaoImpl ticketDao = new TicketDaoImpl();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMYY");
+        LocalDateTime now = LocalDateTime.now();
+        String front = dtf.format(now);
+        String back = "0000" + String.valueOf(ticketDao.getAIId(dtf.format(now)));
+        int end = back.length();
+        int begin = end - 5;
+        ticket.setIdTicket(front + "-" + back.substring(begin, end));
+        ticket.setDateIn(Timestamp.valueOf(LocalDateTime.now()));
+        ticket.setStatus(0);
+        ticket.setTotal(0.0);
+        ticket.setUserByUserNrp(user);
+        ticket.setVehicleByVehicleRegistrationNum(vehicle);
+        Station station = new Station();
+        station.setIdStation(3);
+        ticket.setStationByStationIdStation(station);
+        ticketDao.addData(ticket);
+
+        Stage loginStage = (Stage) btnMbl.getScene().getWindow();
+        loginStage.close();
     }
 
     @FXML
@@ -75,10 +104,35 @@ public class GuestViewController implements Initializable {
 
         user.setVehicleByVehicleRegistrationNum(vehicle);
         user.setUserroleByUserRoleIdUserRole(userrole);
+
         user.setNrp("GUEST" + String.valueOf(userDao.getGuest()));
+
         user.setUserName("");
 
+        vehicleDao.addData(vehicle);
         userDao.addData(user);
+
+        Ticket ticket = new Ticket();
+        TicketDaoImpl ticketDao = new TicketDaoImpl();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMYY");
+        LocalDateTime now = LocalDateTime.now();
+        String front = dtf.format(now);
+        String back = "0000" + String.valueOf(ticketDao.getAIId(dtf.format(now)));
+        int end = back.length();
+        int begin = end - 5;
+        ticket.setIdTicket(front + "-" + back.substring(begin, end));
+        ticket.setDateIn(Timestamp.valueOf(LocalDateTime.now()));
+        ticket.setStatus(0);
+        ticket.setTotal(0.0);
+        ticket.setUserByUserNrp(user);
+        ticket.setVehicleByVehicleRegistrationNum(vehicle);
+        Station station = new Station();
+        station.setIdStation(5);
+        ticket.setStationByStationIdStation(station);
+        ticketDao.addData(ticket);
+
+        Stage loginStage = (Stage) btnMtr.getScene().getWindow();
+        loginStage.close();
     }
 
     @Override

@@ -134,7 +134,7 @@ public class UserDaoImpl implements DaoService<User> {
             String query = "SELECT MAX(SUBSTRING(NRP, 6,5)) FROM User WHERE NRP LIKE 'GUEST%'";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            if (rs.next() && rs.getString("MAX(SUBSTRING(NRP, 6,5))") != null) {
                 result = Integer.parseInt(rs.getString("MAX(SUBSTRING(NRP, 6,5))")) + 1;
             }
         } catch (SQLException | ClassNotFoundException e) {

@@ -111,11 +111,11 @@ public class LoginEmployeeController {
         loginStage.close();
 
         stage.setTitle("Parking Attendants");
-        stage.setMaximized(true);
+        stage.setMaximized(false);
+        stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.getIcons().add(new Image("com/oopl/icon/parking.png"));
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 }
