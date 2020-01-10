@@ -1,6 +1,7 @@
 package com.oopl.dao;
 
-import com.oopl.entity.Ticket;
+import com.oopl.entity.*;
+import com.oopl.util.DBHelper;
 import com.oopl.util.DaoService;
 import com.oopl.util.HibernateUtil;
 import org.hibernate.Criteria;
@@ -8,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +70,144 @@ public class TicketDaoImpl implements DaoService<Ticket> {
         session.close();
         return result;
     }
+
+    public int getAIId(String front) {
+        int result = 1 ;
+        try {
+            Connection connection = DBHelper.createMySQLConnection();
+            String query = "SELECT MAX(SUBSTRING(idTicket, 6,5)) FROM Ticket WHERE SUBSTRING(idTicket,1,4) = ? ";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, front);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next() && rs.getString("MAX(SUBSTRING(idTicket, 6,5))") != null) {
+                result = Integer.parseInt(rs.getString("MAX(SUBSTRING(idTicket, 6,5))")) + 1;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+//    public Ticket getTicketByNRPAndRegisNum(String NRP, String plateNum) {
+//        Ticket ticket = new Ticket();
+//        try {
+//            Connection connection = DBHelper.createMySQLConnection();
+//            String query = "SELECT * FROM Ticket WHERE User_NRP = ? AND Vehicle_registrationNum = ?";
+//            PreparedStatement ps = connection.prepareStatement(query);
+//            ps.setString(1, NRP);
+//            ps.setString(2, plateNum);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                ticket.setIdTicket(rs.getString("idTicket"));
+//                ticket.setDateIn(rs.getTimestamp("date_in"));
+//                ticket.setStatus(rs.getInt("status"));
+//                ticket.setTotal(rs.getDouble("total"));
+//
+//                User u = new User();
+//                u.setNrp(rs.getString("User_NRP"));
+//
+//                ticket.setUserByUserNrp(u);
+//
+//                Vehicle v = new Vehicle();
+//                v.setRegistrationNum(rs.getString("Vehicle_registrationNum"));
+//
+//                ticket.setVehicleByVehicleRegistrationNum(v);
+//
+//                Station s = new Station();
+//                s.setIdStation(rs.getInt("Station_idStation"));
+//
+//                ticket.setStationByStationIdStation(s);
+//            }
+//        } catch (SQLException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        return ticket;
+//    }
+
+    public Ticket getTicketByNRPAndRegisNum(String NRP, String plateNum) {
+        Ticket ticket = new Ticket();
+        try {
+            Connection connection = DBHelper.createMySQLConnection();
+            String query = "SELECT t.*, v.*, ve.*, u.NRP FROM Ticket t JOIN User u ON t.User_NRP = u.NRP JOIN Vehicle v ON u.Vehicle_registrationNum = v.registrationNum JOIN Vehicletype ve ON v.VehicleType_idType = ve.idType WHERE t.User_NRP = ? AND t.Vehicle_registrationNum = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, NRP);
+            ps.setString(2, plateNum);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ticket.setIdTicket(rs.getString("idTicket"));
+                ticket.setDateIn(rs.getTimestamp("date_in"));
+                ticket.setStatus(rs.getInt("status"));
+                ticket.setTotal(rs.getDouble("total"));
+
+                User u = new User();
+                u.setNrp(rs.getString("User_NRP"));
+
+                ticket.setUserByUserNrp(u);
+
+                Vehicletype vehicletype = new Vehicletype();
+                vehicletype.setIdType(rs.getInt("idType"));
+                vehicletype.setVehicleType(rs.getString("vehicleType"));
+                vehicletype.setRate(rs.getDouble("rate"));
+
+                Vehicle v = new Vehicle();
+                v.setRegistrationNum(rs.getString("Vehicle_registrationNum"));
+                v.setVehicletypeByVehicleTypeIdType(vehicletype);
+
+                ticket.setVehicleByVehicleRegistrationNum(v);
+
+                Station s = new Station();
+                s.setIdStation(rs.getInt("Station_idStation"));
+
+                ticket.setStationByStationIdStation(s);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ticket;
+    }
+
+    public Ticket getTicketByIdTicketAndRegisNum(String id, String plateNum) {
+        Ticket ticket = new Ticket();
+        try {
+            Connection connection = DBHelper.createMySQLConnection();
+            String query = "SELECT t.*, v.*, ve.*, u.NRP FROM Ticket t JOIN User u ON t.User_NRP = u.NRP JOIN Vehicle v ON u.Vehicle_registrationNum = v.registrationNum JOIN Vehicletype ve ON v.VehicleType_idType = ve.idType WHERE t.idTicket = ? AND t.Vehicle_registrationNum = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, id);
+            ps.setString(2, plateNum);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ticket.setIdTicket(rs.getString("idTicket"));
+                ticket.setDateIn(rs.getTimestamp("date_in"));
+                ticket.setStatus(rs.getInt("status"));
+                ticket.setTotal(rs.getDouble("total"));
+
+                User u = new User();
+                u.setNrp(rs.getString("User_NRP"));
+
+                ticket.setUserByUserNrp(u);
+
+                Vehicletype vehicletype = new Vehicletype();
+                vehicletype.setIdType(rs.getInt("idType"));
+                vehicletype.setVehicleType(rs.getString("vehicleType"));
+                vehicletype.setRate(rs.getDouble("rate"));
+
+                Vehicle v = new Vehicle();
+                v.setRegistrationNum(rs.getString("Vehicle_registrationNum"));
+                v.setVehicletypeByVehicleTypeIdType(vehicletype);
+
+                ticket.setVehicleByVehicleRegistrationNum(v);
+
+                Station s = new Station();
+                s.setIdStation(rs.getInt("Station_idStation"));
+
+                ticket.setStationByStationIdStation(s);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ticket;
+    }
+
 
 //    public Ticket calculatePrice(Ticket object) {
 //        Ticket result = new Ticket();

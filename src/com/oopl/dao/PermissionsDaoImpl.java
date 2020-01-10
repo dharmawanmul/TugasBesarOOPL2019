@@ -1,6 +1,7 @@
 package com.oopl.dao;
 
 import com.oopl.entity.Permissions;
+import com.oopl.util.DBHelper;
 import com.oopl.util.DaoService;
 import com.oopl.util.HibernateUtil;
 import org.hibernate.Criteria;
@@ -8,6 +9,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,5 +72,24 @@ public class PermissionsDaoImpl implements DaoService<Permissions> {
         }
         session.close();
         return result;
+    }
+
+    public Permissions getPermissionById(String id){
+        Permissions p = new Permissions();
+        try {
+            Connection connection = DBHelper.createMySQLConnection();
+            String query = "SELECT * FROM Permissions WHERE idPermissions = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                p.setIdPermissions(rs.getString("idPermissions"));
+                p.setDateStart(rs.getTimestamp("date_start"));
+                p.setDateEnd(rs.getTimestamp("date_end"));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return p;
     }
 }

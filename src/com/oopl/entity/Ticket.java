@@ -12,7 +12,8 @@ public class Ticket {
     private Integer status;
     private Double total;
     private User userByUserNrp;
-    private StationHasEmployee stationHasEmployee;
+    private Vehicle vehicleByVehicleRegistrationNum;
+    private Station stationByStationIdStation;
 
     @Id
     @Column(name = "idTicket", nullable = false, length = 100)
@@ -92,12 +93,22 @@ public class Ticket {
     }
 
     @ManyToOne
-    @JoinColumns({@JoinColumn(name = "Station_has_Employee_Station_idStation", referencedColumnName = "Station_idStation", nullable = false), @JoinColumn(name = "Station_has_Employee_Employee_idEmployee", referencedColumnName = "Employee_idEmployee", nullable = false)})
-    public StationHasEmployee getStationHasEmployee() {
-        return stationHasEmployee;
+    @JoinColumn(name = "Vehicle_registrationNum", referencedColumnName = "registrationNum", nullable = false)
+    public Vehicle getVehicleByVehicleRegistrationNum() {
+        return vehicleByVehicleRegistrationNum;
     }
 
-    public void setStationHasEmployee(StationHasEmployee stationHasEmployee) {
-        this.stationHasEmployee = stationHasEmployee;
+    public void setVehicleByVehicleRegistrationNum(Vehicle vehicleByVehicleRegistrationNum) {
+        this.vehicleByVehicleRegistrationNum = vehicleByVehicleRegistrationNum;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Station_idStation", referencedColumnName = "idStation", nullable = false)
+    public Station getStationByStationIdStation() {
+        return stationByStationIdStation;
+    }
+
+    public void setStationByStationIdStation(Station stationByStationIdStation) {
+        this.stationByStationIdStation = stationByStationIdStation;
     }
 }

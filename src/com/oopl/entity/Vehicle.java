@@ -40,6 +40,4 @@ public class Vehicle {
     public void setVehicletypeByVehicleTypeIdType(Vehicletype vehicletypeByVehicleTypeIdType) {
         this.vehicletypeByVehicleTypeIdType = vehicletypeByVehicleTypeIdType;
     }
-
-
 }
