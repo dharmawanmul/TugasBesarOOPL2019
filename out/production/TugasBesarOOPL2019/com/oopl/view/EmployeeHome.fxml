@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.chart.*?>
 <?import java.lang.*?>
@@ -18,5 +19,9 @@
             <NumberAxis fx:id="N" side="LEFT" upperBound="275.0" />
          </yAxis>
       </LineChart>
+      <JFXButton fx:id="btnFilter" layoutX="786.0" layoutY="618.0" onAction="#filterAct" prefHeight="31.0" prefWidth="74.0" styleClass="loginBtn" stylesheets="@../../../../../TugasBesarOOPL2019/src/com/oopl/css/stylesheet.css" text="Filter" />
+      <ComboBox fx:id="cmbxFltr" layoutX="157.0" layoutY="618.0" prefWidth="150.0" />
+      <ComboBox fx:id="cmbxFnce" layoutX="350.0" layoutY="618.0" prefWidth="150.0" />
+      <ComboBox fx:id="cmbxAsal" layoutX="544.0" layoutY="618.0" prefWidth="150.0" />
    </children>
 </Pane>

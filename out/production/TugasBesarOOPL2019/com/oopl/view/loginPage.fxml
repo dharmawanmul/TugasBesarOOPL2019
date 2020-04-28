@@ -67,7 +67,7 @@
                         <Font name="Ebrima Bold" size="14.0" />
                     </font>
                 </Label>
-                <JFXButton fx:id="loginBtn" buttonType="RAISED" layoutX="100.0" layoutY="403.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Login">
+                <JFXButton buttonType="RAISED" layoutX="100.0" layoutY="403.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#loginBtnClicked" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" stylesheets="@../css/stylesheet.css" text="Login">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
